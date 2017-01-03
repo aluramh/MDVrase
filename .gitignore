@@ -1,0 +1,5 @@
+#Exclude VSCode configuration files
+/.vscode
+
+#Exclude the node modules
+/node_modules/*
