@@ -6,6 +6,8 @@ block content
             h1.
                 <span class="fa fa-sign-in"></span> Signup
             //- Show authentication messages
+            if message.length > 0
+                div.alert.alert-danger #{message}
 
             //- Login form
             form(action="/signup", method="post")

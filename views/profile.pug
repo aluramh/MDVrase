@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    style.
+        body{
+            padding-top: 80px;
+            word-wrap: break-word;
+        }
+    div.container
+        div.page-header.text-center
+            h1.
+                <h1><span class="fa fa-anchor"></span> Profile Page
+            
+        div.row
+            div.col-sm-6
+                div.well
+                    h3.
+                        <span class="fa fa-user"></span> Local
+                    p
+                        strong id:
+                        span #{user.id}
+                        br
+                        strong username: 
+                        span #{user.username}
+                        br
+                        strong password:
+                        span #{user.password}
