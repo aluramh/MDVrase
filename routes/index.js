@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', {
-        title: 'Express'
-    });
+// =====================================
+// HOME PAGE (with login links) ========
+// =====================================
+router.get('/', function (req, res) {
+    res.render('index.pug'); // load the index.ejs file
 });
 
 module.exports = router;

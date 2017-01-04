@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    div.container
+        div.col-sm-6.col-sm-offset-3
+            h1.
+                <span class="fa fa-sign-in"></span> Login</h1>
+            //- Show message alert, if there's any in Flash-connect
+
+            //- Login form
+            form(action="/login", method="post")
+                div.form-group
+                    label Username
+                    input.form-control(name="username", type="text")
+                div.form-group
+                    label Password
+                    input.form-control(name="password", type="password")
+                div.form-group
+                    label Remember me?
+                    input.form-control(name="remember", type="checkbox", value="yes")
+                button.btn.btn-warning.btn-lg(type="submit") Login
+
+            hr
+
+            p Need an account?
+                a(href="/signup") &nbsp;Signup
+            p Or go
+                a(href="/") &nbsp;home.
