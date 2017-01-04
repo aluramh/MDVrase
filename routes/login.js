@@ -8,10 +8,14 @@ var router = express.Router();
 // =====================================
 // show the login form
 router.get('/', function (req, res) {
-    // render the page and pass in any flash data if it exists
-    res.render('login.pug', {
-        message: req.flash('loginMessage')
-    });
+    if (req.isAuthenticated() === true) {
+        res.redirect('/profile');
+    } else {
+        // render the page and pass in any flash data if it exists
+        res.render('login.pug', {
+            message: req.flash('loginMessage')
+        });
+    }
 });
 
 // process the login form
