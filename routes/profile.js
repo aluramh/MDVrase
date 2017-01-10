@@ -11,7 +11,8 @@ var auth = require('./authenticate');
 // we will use route middleware to verify this (the isLoggedIn function)
 router.get('/', auth.isLoggedIn, function (req, res) {
     res.render('profile.pug', {
-        user: req.user // get the user out of session and pass to template
+        user: req.user, // get the user out of session and pass to template
+        loggedIn: req.isAuthenticated()
     });
 });
 

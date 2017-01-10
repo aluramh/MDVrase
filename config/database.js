@@ -6,5 +6,5 @@ module.exports = {
         'password': 'root'
     },
     'database': 'mdvrase',
-    'users_table': 'users'
+    'users_table': 'usuarios'
 };

@@ -13,7 +13,8 @@ router.get('/', function (req, res) {
     } else {
         // render the page and pass in any flash data if it exists
         res.render('login.pug', {
-            message: req.flash('loginMessage')
+            message: req.flash('loginMessage'),
+            loggedIn: req.isAuthenticated()
         });
     }
 });

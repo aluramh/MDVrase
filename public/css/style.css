@@ -1,0 +1,17 @@
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    color: rgb(255, 255, 255) !important;
+    background-color: rgb(50, 50, 50) !important;
+}
+
+a {
+    color: #00B7FF;
+}
+
+.well {
+    background-color: rgb(20, 20, 20) !important;
+}
+
+.navbar {
+    border-radius: 0px !important;
+}

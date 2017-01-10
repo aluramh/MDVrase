@@ -10,7 +10,8 @@ var router = express.Router();
 router.get('/', function (req, res) {
     // render the page and pass in any flash data if it exists
     res.render('signup.pug', {
-        message: req.flash('signupMessage')
+        message: req.flash('signupMessage'),
+        loggedIn: req.isAuthenticated()
     });
 });
 
