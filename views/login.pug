@@ -1,4 +1,4 @@
-extends layout
+extends common/layout
 
 block content
     div.container
@@ -10,7 +10,7 @@ block content
                 div.alert.alert-danger #{message}
 
             //- Login form
-            form(action="/login", method="post")
+            form#loginForm(action="/login", method="post")
                 div.form-group
                     label Username
                     input.form-control(name="username", type="text")
@@ -18,8 +18,9 @@ block content
                     label Password
                     input.form-control(name="password", type="password")
                 div.form-group
-                    label Remember me?
-                    input.form-control(name="remember", type="checkbox", value="yes")
+                    label.checkbox-inline
+                        input(name="remember", type="checkbox", value=1)
+                        span Remember me?
                 button.btn.btn-warning.btn-lg(type="submit") Login
 
             hr
@@ -29,3 +30,7 @@ block content
             p Or go&nbsp;
                 a(href="/") home
                 span .
+
+//- Script for loginPage
+block additionalScripts
+    script(src="/js/loginPage.js")              

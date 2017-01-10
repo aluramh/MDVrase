@@ -2,16 +2,21 @@ var express = require('express');
 var passport = require('passport');
 
 var router = express.Router();
+var signupController = require('./../controllers/signupController');
 
 // =====================================
 // SIGNUP ==============================
 // =====================================
 // show the signup form
 router.get('/', function (req, res) {
-    // render the page and pass in any flash data if it exists
-    res.render('signup.pug', {
-        message: req.flash('signupMessage'),
-        loggedIn: req.isAuthenticated()
+    //Get companies
+    signupController.getCompanies(req, res, function renderSignupPage() {
+        // render the page and pass in any flash data if it exists
+        res.render('signup.pug', {
+            message: req.flash('signupMessage'),
+            loggedIn: req.isAuthenticated(),
+            companies: req.companies
+        });
     });
 });
 

@@ -19,22 +19,25 @@ router.get('/', function (req, res) {
     }
 });
 
-// process the login form
-router.post('/', passport.authenticate('local-login', {
-        successRedirect: '/profile', // redirect to the secure profile section
-        failureRedirect: '/login', // redirect back to the signup page if there is an error
-        failureFlash: true // allow flash messages
-    }),
-    function (req, res) {
-        console.log("hello");
-
-        if (req.body.remember) {
-            req.session.cookie.maxAge = 1000 * 60 * 3;
-        } else {
-            req.session.cookie.expires = false;
+router.post('/', function (req, res, next) {
+    passport.authenticate('local-login', function (err, user, info) {
+        if (err) {
+            return next(err);
         }
-        res.redirect('/');
-    }
-);
+        if (!user) {
+            return res.redirect('/login');
+        }
+        req.logIn(user, function (err) {
+            if (err) {
+                return next(err);
+            }
+            //Check if remember me was activated in previous Login step
+            if (req.body.remember == 1) {
+                res.cookie('usernameCookie', req.body.username);
+            }
+            return res.redirect('/profile');
+        });
+    })(req, res, next);
+});
 
 module.exports = router;

@@ -58,21 +58,27 @@ module.exports = function (passport) {
                         // create the user
                         var newUserMysql = {
                             username: username,
-                            password: bcrypt.hashSync(password, null, null) // use the generateHash function in our user model
+                            //1 for "Administrador", 2 for "Capturista"
+                            rol: Boolean(req.body.rol) ? req.body.rol : 2,
+                            empresa: req.body.empresa,
+                            nombre: req.body.nombre,
+                            password: bcrypt.hashSync(password, null, null), // use the generateHash function in our user model
+                            //1 for "active" and 0 for "inactive"
+                            activo: Boolean(req.body.activo) ? req.body.activo : 0
                         };
 
                         var insertQuery = "INSERT INTO usuarios ( username, rol, empresa, nombre, password, activo ) values (?,?,?,?,?,?)";
 
                         connection.query(insertQuery, [
                             newUserMysql.username,
-                            1,
-                            1,
-                            "Alejandro Ramírez",
+                            newUserMysql.rol,
+                            newUserMysql.empresa,
+                            newUserMysql.nombre,
                             newUserMysql.password,
-                            1
+                            newUserMysql.activo
                         ], function (err, rows) {
+                            if (err) throw err;
                             newUserMysql.id = rows.insertId;
-
                             return done(null, newUserMysql);
                         });
                     }
@@ -95,6 +101,7 @@ module.exports = function (passport) {
                 passReqToCallback: true // allows us to pass back the entire request to the callback
             },
             function (req, username, password, done) { // callback with email and password from our form
+
                 connection.query("SELECT * FROM usuarios WHERE username = ?", [username], function (err, rows) {
                     if (err)
                         return done(err);

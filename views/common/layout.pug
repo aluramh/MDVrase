@@ -1,0 +1,13 @@
+doctype html
+html
+    include head
+    body
+        //- Include navbar in the page
+        include navbar
+
+        //- Block where main content of the page will go to
+        div.container
+            block content
+
+        //- Include block for optional additional script loading
+        block additionalScripts
