@@ -3,7 +3,7 @@ function getCookie(e) {
     for (var r = e + "=", n = document.cookie.split(";"), t = 0; t < n.length; t++) {
         for (var a = n[t];
             " " == a.charAt(0);) a = a.substring(1);
-        if (0 == a.indexOf(r)) return a.substring(r.length, a.length)
+        if (0 == a.indexOf(r)) return a.substring(r.length, a.length);
     }
     return "";
 }
