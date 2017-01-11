@@ -1,5 +1,6 @@
 #Exclude VSCode configuration files
 /.vscode
+/.jshintrc
 
 #Exclude the node modules
 /node_modules/*

@@ -1,10 +1,7 @@
 extends common/layout
 
 block content
-    style.
-        body{
-            word-wrap: break-word;
-        }
+
     div.container
         div.page-header.text-center
             h1
@@ -18,22 +15,25 @@ block content
                     h3
                         span.fa.fa-user  
                         span Local
-                    p
-                        strong ID de usuario: 
-                        span #{user.id_usuario}
-                        br
-                        strong Username: 
-                        span #{user.username}
-                        br
-                        strong Password: 
-                        span #{user.password}
-                        br
-                        strong Nombre: 
-                        span #{user.nombre}
-                        br
-                        strong Empresa: 
-                        span #{user.nombre_empresa}
-                        br
-                        strong Rol: 
-                        span #{user.nombre_rol}
-                        br
+                    div.row
+                        div.col-md-12
+                            table.table.table-bordered.table-hover
+                                thead
+                                    tr
+                                        th ID de usuario
+                                        td #{user.id_usuario}
+                                    tr
+                                        th Username
+                                        td #{user.username}
+                                    tr
+                                        th Password
+                                        td #{user.password}
+                                    tr
+                                        th Nombre
+                                        td #{user.nombre}
+                                    tr
+                                        th Empresa
+                                        td #{user.nombre_empresa}
+                                    tr
+                                        th Rol        
+                                        td #{user.nombre_rol}

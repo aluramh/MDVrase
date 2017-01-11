@@ -9,11 +9,16 @@ nav.navbar.navbar-inverse
                 i.fa.fa-car(aria-hidden="true") &nbsp;
                 span Manejo de vehiculos RASE
         div#myNavbar.collapse.navbar-collapse
-            ul.nav.navbar-nav
-                li.active
-                    a(href="profile") Profile
-                li
-                    a(href="#") Page 2
+            if loggedIn
+                ul.nav.navbar-nav
+                    li.active
+                        a(href="/profile") Perfil
+                    li
+                        a(href="/vehicles") Vehiculos
+                    li
+                        a(href="#") Recordatorios
+                    li
+                        a(href="#") Admin
             unless loggedIn
                 ul.nav.navbar-nav.navbar-right
                     li

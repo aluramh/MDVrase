@@ -6,17 +6,15 @@ var connection = mysql.createConnection(dbconfig.connection);
 //Use database
 connection.query('USE ' + dbconfig.database);
 
-//Retrieve all the User info
-exports.getUserInfo = function (req, res, next) {
+exports.getCars = function (req, res, next) {
     //SQL to get queries
-    queryString = `SELECT * FROM usuarios 
-                   LEFT JOIN empresas ON empresa = id_empresa
-                   LEFT JOIN roles ON rol = id_rol
-                   WHERE id_usuario = ` + req.user.id_usuario;
+    queryString = `SELECT * FROM carros 
+                   LEFT JOIN marcas ON marca = id_marca
+                   LEFT JOIN modelos ON modelo = id_modelo
+                   WHERE 1`;
     //Execute query and throw errors OR return request
     connection.query(queryString, function (err, rows) {
         if (err) throw err;
-        //Pass information over to callback
         next(req, res, rows);
     });
 };

@@ -2,6 +2,7 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     color: rgb(255, 255, 255) !important;
     background-color: rgb(50, 50, 50) !important;
+    word-wrap: break-word;
 }
 
 a {
@@ -14,4 +15,17 @@ a {
 
 .navbar {
     border-radius: 0px !important;
+}
+
+.table {
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+th {
+    vertical-align: middle !important;
+}
+
+tr:hover {
+    background-color: rgb(50, 50, 50);
 }
