@@ -3,66 +3,29 @@ extends common/layout
 block content
     div.row
         div.col-md-3
-            p.lead Vehiculos RASE
+            p.lead Filtros
             div.list-group
                 a.list-group-item(href="#") Category 1
                 a.list-group-item(href="#") Category 2
                 a.list-group-item(href="#") Category 3
         div.col-md-9
             div.row
-                div.col-sm-4.col-lg-4.col-md-4
-                    div.thumbnail
-                        img(src="http://placehold.it/320x150")
-                        div.caption
-                            h4.pull-right $24.99
-                            h4
-                                a First product
-                            p See more snippets like this online store item at RASE.com
-                div.col-sm-4.col-lg-4.col-md-4
-                    div.thumbnail
-                        img(src="http://placehold.it/320x150")
-                        div.caption
-                            h4.pull-right $24.99
-                            h4
-                                a First product
-                            p See more snippets like this online store item at RASE.com
-                div.col-sm-4.col-lg-4.col-md-4
-                    div.thumbnail
-                        img(src="http://placehold.it/320x150")
-                        div.caption
-                            h4.pull-right $24.99
-                            h4
-                                a First product
-                            p See more snippets like this online store item at RASE.com
-                div.col-sm-4.col-lg-4.col-md-4
-                    div.thumbnail
-                        img(src="http://placehold.it/320x150")
-                        div.caption
-                            h4.pull-right $24.99
-                            h4
-                                a First product
-                            p See more snippets like this online store item at RASE.com
-                div.col-sm-4.col-lg-4.col-md-4
-                    div.thumbnail
-                        img(src="http://placehold.it/320x150")
-                        div.caption
-                            h4.pull-right $24.99
-                            h4
-                                a First product
-                            p See more snippets like this online store item at RASE.com
-                div.col-sm-4.col-lg-4.col-md-4
-                    div.thumbnail
-                        img(src="http://placehold.it/320x150")
-                        div.caption
-                            h4.pull-right $24.99
-                            h4
-                                a First product
-                            p See more snippets like this online store item at RASE.com
-                div.col-sm-4.col-lg-4.col-md-4
-                    div.thumbnail
-                        img(src="http://placehold.it/320x150")
-                        div.caption
-                            h4.pull-right $24.99
-                            h4
-                                a First product
-                            p See more snippets like this online store item at RASE.com                            
+                each vehicle in vehicles
+                    div.col-sm-6.col-lg-6.col-md-6
+                        div.thumbnail(redirect = "/vehicles/" + vehicle.id_carro)
+                            img.thumbnail-image(src="/uploads/" + vehicle.foto_vehiculo)
+                            div.caption
+                                h4.pull-right.marca-carro #{vehicle.nombre_marca}
+                                h4 #{vehicle.nombre_modelo} #{vehicle.color} #{vehicle.year}
+                                p 
+                                    strong #{vehicle.nombre_empresa}
+                                    br
+                                    span #{vehicle.num_placa}
+                                    br
+                                    if vehicle.descripcion == null
+                                        i No hay descripción disponible.
+                                    else
+                                        i #{vehicle.descripcion}
+
+block additionalScripts
+    script(src="/js/vehicleListPage.js")

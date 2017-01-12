@@ -29,3 +29,22 @@ th {
 tr:hover {
     background-color: rgb(50, 50, 50);
 }
+
+.thumbnail-image {
+    object-fit: cover;
+    max-height: 150px;
+    width: auto;
+}
+
+.thumbnail {
+    cursor: pointer;
+}
+
+.jumbotron {
+    background-color: rgb(20, 20, 20);
+    color: #fff;
+}
+
+.placeholder-select {
+    color: rgb(153, 153, 153);
+}

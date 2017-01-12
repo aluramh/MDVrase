@@ -12,9 +12,9 @@ exports.getUserInfo = function (req, res, next) {
     queryString = `SELECT * FROM usuarios 
                    LEFT JOIN empresas ON empresa = id_empresa
                    LEFT JOIN roles ON rol = id_rol
-                   WHERE id_usuario = ` + req.user.id_usuario;
-    //Execute query and throw errors OR return request
-    connection.query(queryString, function (err, rows) {
+                   WHERE id_usuario = ?`;
+    //Execute query, with escaped values, and throw errors OR return request.
+    connection.query(queryString, [req.user.id_usuario], function (err, rows) {
         if (err) throw err;
         //Pass information over to callback
         next(req, res, rows);

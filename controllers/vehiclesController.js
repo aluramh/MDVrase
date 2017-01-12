@@ -11,6 +11,7 @@ exports.getCars = function (req, res, next) {
     queryString = `SELECT * FROM carros 
                    LEFT JOIN marcas ON marca = id_marca
                    LEFT JOIN modelos ON modelo = id_modelo
+                   LEFT JOIN empresas ON empresa = id_empresa
                    WHERE 1`;
     //Execute query and throw errors OR return request
     connection.query(queryString, function (err, rows) {

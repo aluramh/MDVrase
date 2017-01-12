@@ -18,8 +18,9 @@
 }
 
 .caption {
-    height: 110px;
+    height: 130px;
     overflow: hidden;
+    padding: 9px 18px !important;
 }
 
 .caption h4 {
@@ -37,7 +38,9 @@
 }
 
 .thumbnail {
-    padding: 0;
+    padding: 0px !important;
+    border-style: none !important;
+    border-radius: 0px;
 }
 
 .thumbnail .caption-full {
@@ -45,6 +48,14 @@
     color: #333;
 }
 
+.thumbnail:hover {
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.2);
+}
+
 footer {
     margin: 50px 0;
+}
+
+.marca-carro {
+    color: rgb(200, 200, 200);
 }

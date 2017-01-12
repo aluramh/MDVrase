@@ -11,14 +11,14 @@ nav.navbar.navbar-inverse
         div#myNavbar.collapse.navbar-collapse
             if loggedIn
                 ul.nav.navbar-nav
-                    li.active
-                        a(href="/profile") Perfil
+                    li.active #[a(href="/profile") Perfil]
+                    li #[a(href="/vehicles") Vehiculos]
+                    li #[a(href="#") Recordatorios]
                     li
-                        a(href="/vehicles") Vehiculos
-                    li
-                        a(href="#") Recordatorios
-                    li
-                        a(href="#") Admin
+                        a.dropdown-toggle(href="#", data-toggle="dropdown") Admin #[span.caret]
+                        ul.dropdown-menu
+                            li #[a(href="/vehicles/add") Agregar vehiculo]
+                            li #[a(href="/resources/add") Agregar datos]
             unless loggedIn
                 ul.nav.navbar-nav.navbar-right
                     li

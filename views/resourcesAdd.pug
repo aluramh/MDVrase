@@ -1,0 +1,28 @@
+extends common/layout
+
+block content
+     div.jumbotron.jumbotron-fluid
+        h3.text-center Agregar marca de vehiculos
+        form#marcaForm(action="/resources/add", method="post")
+            div.row
+                form#addMarca
+                    textarea(name="formType", style="display:none;" required, readonly="readonly") addMarca
+                    div.col-md-offset-2.col-xs-12.col-md-8
+                        label(for="marca") Marca de vehiculo:
+                        div.input-group
+                            input#marca.form-control(type="text", name="marca", placeholder="Ingresar una marca de vehiculos", required)
+                            span.input-group-btn
+                                button.btn.btn-default(type="submit") Agregar
+
+        h3.text-center Agregar modelo de vehiculos
+        form#modeloForm(action="/resources/add", method="post")
+            div.row
+                form#addModelo
+                    div.col-md-offset-2.col-xs-12.col-md-8
+                        label(for="modelo") Modelo de vehiculo:
+                        div.input-group
+                            input#modelo.form-control(type="text", name="modelo", placeholder="Ingresar un modelo de vehiculo", required)
+                            span.input-group-btn
+                                button.btn.btn-default(type="submit") Agregar
+
+block additionalScripts

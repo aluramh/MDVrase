@@ -32,4 +32,4 @@ INSERT INTO carros (
     descripcion,
     conductor
 ) VALUES
-(1, "SVT4566", NULL, "Blanco", 2, 3, "2016-01-01", "ABCDE123456", "2017-01-01", NULL, NULL, "Alejandro Ramirez");
+(1, "SVT4566", NULL, "Blanco", 2, 3, "2016", "ABCDE123456", "2017-01-01", NULL, NULL, "Alejandro Ramirez");
