@@ -1,22 +1,23 @@
-// load up the user model
-var mysql = require('mysql');
-var dbconfig = require('./../config/database');
-var connection = mysql.createConnection(dbconfig.connection);
+// load up the DB connection pool
+var pool = require('./../config/databaseConnectionPool');
 
-//Use database
-connection.query('USE ' + dbconfig.database);
-
-//Retrieve all the User info
 exports.getUserInfo = function (req, res, next) {
-    //SQL to get queries
-    queryString = `SELECT * FROM usuarios 
+    //Get connection from pool
+    pool.getConnection(function (err, connection) {
+        //Check if there's an error when connecting
+        if (err) throw err;
+        //Else, declare query to execute
+        queryString = `SELECT * FROM usuarios 
                    LEFT JOIN empresas ON empresa = id_empresa
                    LEFT JOIN roles ON rol = id_rol
                    WHERE id_usuario = ?`;
-    //Execute query, with escaped values, and throw errors OR return request.
-    connection.query(queryString, [req.user.id_usuario], function (err, rows) {
-        if (err) throw err;
-        //Pass information over to callback
-        next(req, res, rows);
+        //Execute query, with escaped values, and throw errors OR return request.
+        connection.query(queryString, [req.user.id_usuario], function (err, rows) {
+            if (err) throw err;
+            //Query was executed correctly, so release the connection
+            connection.release();
+            //And finally pass information over to callback
+            next(req, res, rows);
+        });
     });
 };
