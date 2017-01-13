@@ -19,7 +19,6 @@ router.get('/', function (req, res) {
         templateData.empresas = rows;
         resourcesController.getMarcas(req, res, templateData, function renderResourcesPage(req, res, templateData, rows) {
             templateData.marcas = rows;
-            console.log(templateData);
             // render the page and pass in any flash data if it exists
             res.render('resourcesAdd.pug', templateData);
         });

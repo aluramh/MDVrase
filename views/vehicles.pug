@@ -13,10 +13,11 @@ block content
                 each vehicle in vehicles
                     div.col-sm-6.col-lg-6.col-md-6
                         div.thumbnail(redirect = "/vehicles/" + vehicle.id_carro)
-                            img.thumbnail-image(src="/uploads/" + vehicle.foto_vehiculo)
+                            img.thumbnail-image(src="/uploads/" + (vehicle.foto_vehiculo != null ? vehicle.foto_vehiculo : "/no_image.jpg"))
+
                             div.caption
                                 h4.pull-right.marca-carro #{vehicle.nombre_marca}
-                                h4 #{vehicle.nombre_modelo} #{vehicle.color} #{vehicle.year}
+                                h4 #{vehicle.modelo} #{vehicle.color} #{vehicle.year}
                                 p 
                                     strong #{vehicle.nombre_empresa}
                                     br

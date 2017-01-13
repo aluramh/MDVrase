@@ -20,29 +20,28 @@ router.get('/', function (req, res) {
 });
 
 router.get('/add', function (req, res) {
-    // render the page and pass in any flash data if it exists
-    res.render('vehiclesAdd.pug', {
+    //For access to get Marcas and Empresas values
+    var resourcesController = require('./../controllers/resourcesController');
+    //Declare variable for template date
+    var templateData = {
         loggedIn: req.isAuthenticated()
+    };
+    //Retrieve empresas
+    resourcesController.getEmpresas(req, res, templateData, function proceedToGetMarcas(req, res, templateData, rows) {
+        templateData.empresas = rows;
+        //Retrieve Marcas
+        resourcesController.getMarcas(req, res, templateData, function renderResourcesPage(req, res, templateData, rows) {
+            templateData.marcas = rows;
+            // render the page and pass in any flash data if it exists
+            res.render('vehiclesAdd.pug', templateData);
+        });
+    });
+});
+
+router.post('/add', function (req, res) {
+    vehiclesController.addCar(req, res, function renderAddCarSuccessPage(req, res, message) {
+        res.send(message);
     });
 });
 
 module.exports = router;
-
-var obj = {
-    color: "Blanco",
-    conductor: "Alejandro Ramirez",
-    descripcion: null,
-    equipo_extra: null,
-    fecha_obtenido: '2017 - 01 - 01 T06: 00: 00.000 Z',
-    foto_vehiculo: null,
-    empresa: 1,
-    // id_carro: 1,
-    // id_marca: 1,
-    // id_modelo: 2,
-    // marca: 1,
-    // modelo: 2,
-    nombre_marca: "Mazda",
-    nombre_modelo: "Mazda 3",
-    num_placa: "SVT4566",
-    num_serie: "ABCDE123456"
-}

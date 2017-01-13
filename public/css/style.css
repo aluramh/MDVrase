@@ -22,6 +22,14 @@ a {
     word-wrap: break-word;
 }
 
+select:invalid {
+    color: rgb(153, 153, 153);
+}
+
+valid {
+    color: #555;
+}
+
 th {
     vertical-align: middle !important;
 }

@@ -18,3 +18,48 @@ exports.getCars = function (req, res, next) {
         });
     });
 };
+
+exports.addCar = function (req, res, next) {
+    //Get connection to DB from connection pool
+    pool.getConnection(function (err, connection) {
+        if (err) throw err;
+
+        var escapeData = [
+            // empresa,
+            req.body.empresa,
+            // num_placa,
+            req.body.placa,
+            // foto_vehiculo (if there is any)
+            Boolean(req.body.foto) ? req.body.foto : null,
+            // color,
+            req.body.color,
+            // modelo,
+            req.body.modelo,
+            // marca,
+            req.body.marca,
+            // year,
+            req.body.year,
+            // num_serie,
+            req.body.serie,
+            // fecha_obtenido,
+            req.body.fechaObtenido,
+            // equipo_extra,
+            Boolean(req.body.equipoExtra) ? req.body.equipoExtra : null,
+            // descripcion,
+            Boolean(req.body.descripcion) ? req.body.descripcion : null,
+            // conductor
+            req.body.conductor,
+        ];
+
+        //SQL to get queries
+        queryString = `INSERT INTO carros(empresa, num_placa, foto_vehiculo, color, modelo, marca, year,
+            num_serie, fecha_obtenido, equipo_extra, descripcion, conductor)
+            VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`;
+        //Execute query and throw errors OR return request
+        connection.query(queryString, escapeData, function (err, rows) {
+            if (err) throw err;
+            connection.release();
+            next(req, res, "Se agrego el vehiculo exitosamente.");
+        });
+    });
+};

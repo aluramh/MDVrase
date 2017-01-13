@@ -6,13 +6,15 @@ block content
             div.row
                 div.col-md-offset-1.col-md-5.col-xs-12.form-group
                     label(for="modelo") Modelo:
-                    select#modelo.form-control(name="modelo", required)
-                        option(value="", selected, disabled) Selecciona el modelo del vehiculo
+                    input#modelo.form-control(type="text", name="modelo", placeholder="Modelo del vehiculo", required)
                     
                 div.col-md-5.col-xs-12.form-group
                     label(for="marca") Marca:
                     select#marca.form-control(name="marca", required)
                         option(value="", selected, disabled) Selecciona la marca del vehiculo
+                        each marca in marcas
+                            option(value=marca.id_marca) #{marca.nombre_marca}
+
             div.row
                 div.col-md-offset-1.col-md-5.col-xs-12.form-group
                     label(for="color") Color:
@@ -25,13 +27,18 @@ block content
                     label(for="empresa") Empresa:
                     select#empresa.form-control(name="empresa", required)
                         option(value="", selected, disabled) Selecciona la empresa del vehiculo
+                        each empresa in empresas
+                            option.valid(value=empresa.id_empresa) #{empresa.nombre_empresa}
+
                 div.col-md-5.col-xs-12.form-group
                     label(for="placa") No. de placa:
                     input#placa.form-control(type="text", name="placa", placeholder="Placas del vehiculo", required)
+
             div.row
                 div.col-md-offset-1.col-md-5.col-xs-12.form-group
                     label(for="serie") No. de serie:
                     input#serie.form-control(type="text", name="serie", placeholder="No. de serie del vehiculo", required)
+
                 div.col-md-5.col-xs-12.form-group
                     label(for="fechaObtenido") Fecha obtenido:
                     input#fechaObtenido.form-control(type="text", name="fechaObtenido", placeholder="Fecha que se obtuvo (DD/MM/AAAA)", required)
@@ -50,32 +57,13 @@ block content
             div.row
                 div.col-md-offset-1.col-md-5.col-xs-12.form-group
                     label(for="descripcion") Descripcion del vehiculo:
-                    textarea#descripcion.form-control(rows="5")
+                    textarea#descripcion.form-control(name="descripcion", rows="5")
                 div.col-md-5.col-xs-12.form-group
                     label(for="equipoExtra") Equipo extra:
-                    textarea#equipoExtra.form-control(rows="5")
+                    textarea#equipoExtra.form-control(name="equipoExtra", rows="5")
 
             div.form-group.row
                 div.col-md-offset-1.col-md-12
                     button.btn.btn-primary(type="submit") Agregar vehiculo
 
-    //- select.form-control(name="empresa", placeholder="", required)
-    //-     option(value="", selected, disabled) Selecciona la empresa que corresponde
-    //-     each company in companies
-    //-         option(value=company.id_empresa) #{company.nombre_empresa}
-
 block additionalScripts
-
-    //-             modelo,
-    //-             marca,
-    //-             color,
-    //-             year,
-    //-             empresa, 
-    //-             num_placa, 
-    //-             num_serie,
-    //-             fecha_obtenido,
-    //-             conductor
-    //- descripcion,
-    //-             foto_vehiculo,
-    //- equipo_extra,
-

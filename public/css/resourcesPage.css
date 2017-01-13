@@ -1,0 +1,8 @@
+.extra-padding {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.no-right-padding {
+    padding-right: 0px;
+}

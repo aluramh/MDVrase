@@ -39,7 +39,7 @@ exports.addEmpresa = function (req, res, next) {
             if (rows.length > 0) {
                 next(req, res, "Esta empresa ya existe en la base de datos.");
             } else {
-                connection.query("INSERT INTO empresas (nombre_empresa) VALUES (?)", [req.body.empresa], function (err) {
+                connection.query("INSERT INTO empresas (nombre_empresa, rfc) VALUES (?, ?)", [req.body.empresa, req.body.rfc], function (err) {
                     if (err) throw err;
                     connection.release();
                     next(req, res, "La empresa fue agregada exitosamente!");
