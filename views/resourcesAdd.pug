@@ -1,28 +1,77 @@
 extends common/layout
 
 block content
-     div.jumbotron.jumbotron-fluid
-        h3.text-center Agregar marca de vehiculos
+    style.
+        .extra-padding{
+            padding-right: 30px;
+            padding-left: 30px;
+        }
+        .no-right-padding{
+            padding-right: 0px;
+        }
+    div.jumbotron.jumbotron-fluid
+        h2.text-center Agregar marca de vehiculos
         form#marcaForm(action="/resources/add", method="post")
             div.row
-                form#addMarca
-                    textarea(name="formType", style="display:none;" required, readonly="readonly") addMarca
-                    div.col-md-offset-2.col-xs-12.col-md-8
-                        label(for="marca") Marca de vehiculo:
-                        div.input-group
-                            input#marca.form-control(type="text", name="marca", placeholder="Ingresar una marca de vehiculos", required)
-                            span.input-group-btn
-                                button.btn.btn-default(type="submit") Agregar
+                textarea(name="formType", style="display:none;" required, readonly="readonly") addMarca
+                div.col-md-offset-2.col-xs-12.col-md-8.extra-padding
+                    label(for="marca") Marca de vehiculo:
+                    div.input-group
+                        input#marca.form-control(type="text", name="marca", placeholder="Ingresar una marca de vehiculos", required)
+                        span.input-group-btn
+                            button.btn.btn-primary(type="submit") Agregar
 
-        h3.text-center Agregar modelo de vehiculos
-        form#modeloForm(action="/resources/add", method="post")
+        
+        h3.text-center Lista de marcas
+        div.row
+            div.col-md-offset-2.col-md-8
+                table.table.table-bordered
+                    thead #[tr]
+                        th ID
+                        th Nombre marca
+                    tbody 
+                        each marca in marcas
+                            tr
+                                td #{marca.id_marca}
+                                td #{marca.nombre_marca}
+            
+        h2.text-center Agregar empresas
+        form#empresaForm(action="/resources/add", method="post")
             div.row
-                form#addModelo
-                    div.col-md-offset-2.col-xs-12.col-md-8
-                        label(for="modelo") Modelo de vehiculo:
-                        div.input-group
-                            input#modelo.form-control(type="text", name="modelo", placeholder="Ingresar un modelo de vehiculo", required)
-                            span.input-group-btn
-                                button.btn.btn-default(type="submit") Agregar
+                //- Offset column by 2 and make 8col in width
+                div.col-md-offset-2.col-md-8 
+                    //- Inside this 8c element we have 12 available cols.
+                    //- First label and input
+                    div.col-md-5.no-right-padding
+                        label(for="empresa") Nombre de empresa:
+                        div.form-group
+                            input#empresa.form-control(type="text", name="empresa", placeholder="Ingresa el nombre de la empresa", required)
+                    //- Second input 
+                    div.col-md-5.no-right-padding
+                        label(for="rfc") RFC de empresa:
+                        div.form-group
+                            input#rfc.form-control(type="text", name="rfc", placeholder="Ingresa el RFC de la empresa", required)
+
+                    //- Submit button
+                    div.col-md-2
+                        label.hidden-sm(style="visibility: hidden;") &nbsp;
+                        div.form-group
+                                div.btn.btn-primary Agregar
+
+        h3.text-center Lista de empresas
+        div.row
+            div.col-md-offset-2.col-md-8
+                table.table.table-bordered
+                    thead #[tr]
+                        th ID
+                        th Nombre de empresa
+                        th RFC
+                    tbody
+                        each empresa in empresas
+                            tr
+                                td #{empresa.id_empresa}
+                                td #{empresa.nombre_empresa}
+                                td #{empresa.RFC}
+
 
 block additionalScripts

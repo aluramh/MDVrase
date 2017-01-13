@@ -8,10 +8,10 @@ CREATE TABLE IF NOT EXISTS `marcas`(
     nombre_marca VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS `modelos`(
-    id_modelo INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nombre_modelo VARCHAR(255) NOT NULL
-);
+-- CREATE TABLE IF NOT EXISTS `modelos`(
+--     id_modelo INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+--     nombre_modelo VARCHAR(255) NOT NULL
+-- );
 
 CREATE TABLE IF NOT EXISTS `empresas`(
     id_empresa INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `carros`(
     num_placa VARCHAR(20) NOT NULL,
     foto_vehiculo VARCHAR(100),
     color VARCHAR(40) NOT NULL,
-    modelo INT UNSIGNED NOT NULL,
+    modelo VARCHAR(100) NOT NULL,
     marca INT UNSIGNED NOT NULL,
     year YEAR NOT NULL,
     num_serie VARCHAR(100) NOT NULL, 
@@ -62,7 +62,6 @@ CREATE TABLE IF NOT EXISTS `carros`(
     conductor VARCHAR(250) NOT NULL,
 
     FOREIGN KEY (empresa) REFERENCES empresas(id_empresa),
-    FOREIGN KEY (modelo) REFERENCES modelos(id_modelo),
     FOREIGN KEY (marca) REFERENCES marcas(id_marca)
 );
 

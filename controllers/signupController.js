@@ -1,19 +1,21 @@
-// load up the user model
-var mysql = require('mysql');
-var dbconfig = require('./../config/database');
-var connection = mysql.createConnection(dbconfig.connection);
-
-//Use database
-connection.query('USE ' + dbconfig.database);
+// load up the DB connection pool
+var pool = require('./../config/databaseConnectionPool');
 
 //Retrieve all the companies' names
 exports.getCompanies = function (req, res, next) {
-    //SQL to get queries
-    queryString = "SELECT * FROM empresas";
-    //Execute query and throw errors OR return request
-    connection.query(queryString, function (err, rows) {
+    //Get connection to DB from connection pool
+    pool.getConnection(function (err, connection) {
         if (err) throw err;
-        req.companies = rows;
-        next();
+        //SQL to get queries
+        queryString = "SELECT * FROM empresas";
+        //Execute query and throw errors OR return request
+        connection.query(queryString, function (err, rows) {
+            if (err) throw err;
+            connection.release();
+
+            //This has to change vvv
+            req.companies = rows;
+            next();
+        });
     });
 };
