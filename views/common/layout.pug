@@ -12,6 +12,8 @@ html
             //- This .pug file contains the footer for the page 
             include footer
 
+        //- Load .js files at the end of </body> for faster rendering
+        include bodyEnd
         
         //- Include block for optional additional script loading
         block additionalScripts

@@ -32,7 +32,7 @@ block content
                                 th Nombre marca
                             tbody 
                                 each marca in marcas
-                                    tr
+                                    tr.custom-trow
                                         td #{marca.id_marca}
                                         td #{marca.nombre_marca}
                     
@@ -72,7 +72,7 @@ block content
                                 th RFC
                             tbody
                                 each empresa in empresas
-                                    tr
+                                    tr.custom-trow
                                         td #{empresa.id_empresa}
                                         td #{empresa.nombre_empresa}
                                         td #{empresa.rfc}

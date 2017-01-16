@@ -9,23 +9,35 @@ nav.navbar.navbar-inverse
                 i.fa.fa-car(aria-hidden="true") &nbsp;
                 span Manejo de vehiculos RASE
         div#myNavbar.collapse.navbar-collapse
+
+            //- Tabs shown when user is logged in
             if loggedIn
                 ul.nav.navbar-nav
-                    li.active #[a(href="/profile") Perfil]
-                    li #[a(href="/vehicles") Vehiculos]
-                    li #[a(href="#") Recordatorios]
-                    li
+                    li#perfilTab #[a(href="/profile") Perfil]
+                    li#vehiculosTab #[a(href="/vehicles") Vehiculos]
+                    li#recordatoriosTab #[a(href="#") Recordatorios]
+                    li#administradorTab
                         a.dropdown-toggle(href="#", data-toggle="dropdown") Admin #[span.caret]
                         ul.dropdown-menu
-                            li #[a(href="/vehicles/add") Agregar vehiculo]
-                            li #[a(href="/resources") Agregar datos]
+                            li#agregarVehiculosTab #[a(href="/vehicles/add") Agregar vehiculo]
+                            li#agregarDatosTab #[a(href="/resources") Agregar datos]
+            
+                ul.nav.navbar-nav.navbar-right
+                    li#logoutTab
+                        a(href="/logout")
+                            span.glyphicon.glyphicon-log-out
+                            span &nbsp;Log out
+            //- Tabs shown if user hasn't logged in
             unless loggedIn
                 ul.nav.navbar-nav.navbar-right
-                    li
+                    li#signupTab
                         a(href="/signup")
                             span.glyphicon.glyphicon-user
                             span &nbsp;Sign Up
-                    li
+                    li#loginTab
                         a(href="/login")
                             span.glyphicon.glyphicon-log-in
                             span &nbsp;Log in
+
+        //- Script for showing current active tab
+        script(src="/js/navigation.js")

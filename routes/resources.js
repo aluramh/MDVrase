@@ -11,6 +11,7 @@ router.use(auth.isLoggedIn);
 router.get('/', function (req, res) {
     //Build the data that will be used in the template
     var templateData = {
+        title: 'Recursos',
         loggedIn: req.isAuthenticated()
         // empresas: data.empresasData,
         // marcas: data.marcasData

@@ -6,6 +6,7 @@ var router = express.Router();
 // =====================================
 router.get('/', function (req, res) {
     res.render('index.pug', {
+        title: 'Manejo de vehiculos RASE',
         loggedIn: req.isAuthenticated()
     }); // load the index.ejs file
 });

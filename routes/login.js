@@ -13,6 +13,7 @@ router.get('/', function (req, res) {
     } else {
         // render the page and pass in any flash data if it exists
         res.render('login.pug', {
+            title: 'Ingresar a la pagina',
             message: req.flash('loginMessage'),
             loggedIn: req.isAuthenticated()
         });

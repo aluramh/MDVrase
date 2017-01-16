@@ -13,6 +13,7 @@ router.get('/', function (req, res) {
     signupController.getCompanies(req, res, function renderSignupPage() {
         // render the page and pass in any flash data if it exists
         res.render('signup.pug', {
+            title: 'Registro',
             message: req.flash('signupMessage'),
             loggedIn: req.isAuthenticated(),
             companies: req.companies

@@ -1,6 +1,6 @@
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    color: rgb(255, 255, 255) !important;
+    color: rgb(255, 255, 255);
     background-color: rgb(50, 50, 50) !important;
     word-wrap: break-word;
 }
@@ -30,11 +30,11 @@ valid {
     color: #555;
 }
 
-th {
+.vertical-aligned-trow {
     vertical-align: middle !important;
 }
 
-tr:hover {
+.custom-trow:hover {
     background-color: rgb(50, 50, 50);
 }
 
