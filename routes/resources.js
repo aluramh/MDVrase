@@ -12,9 +12,9 @@ router.get('/', function (req, res) {
     //Build the data that will be used in the template
     var templateData = {
         title: 'Recursos',
-        loggedIn: req.isAuthenticated()
-        // empresas: data.empresasData,
-        // marcas: data.marcasData
+        loggedIn: req.isAuthenticated(),
+        message: req.flash('message'),
+        success: req.flash('success'),
     };
     resourcesController.getEmpresas(req, res, templateData, function proceedToGetMarcas(req, res, templateData, rows) {
         templateData.empresas = rows;
@@ -39,9 +39,9 @@ router.post('/add', function (req, res) {
             res.send("Es informacion no se pudo agregar. Intentar mas tarde.");
             return;
     }
-    callback(req, res, function returnFormResponse(req, res, message) {
-        //Redirect to /resources/add and send a flash message with the result
-        res.send(message);
+    callback(req, res, function returnFormResponse(req, res) {
+        //Redirect to the original page (flash message has already been set)
+        res.redirect('/resources');
     });
 });
 

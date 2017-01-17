@@ -41,11 +41,14 @@
     padding: 0px !important;
     border-style: none !important;
     border-radius: 0px;
+    background-color: #fff !important;
+    color: rgb(50, 50, 50) !important;
 }
 
-.thumbnail .caption-full {
+.thumbnail .caption-full,
+.thumbnail .caption {
     padding: 9px;
-    color: #333;
+    color: #333 !important;
 }
 
 .thumbnail:hover {

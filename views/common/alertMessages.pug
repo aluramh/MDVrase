@@ -1,0 +1,8 @@
+if success == "true"
+    div.alert.alert-dismissable.alert-success #{message}
+        button.close(type="button", data-dismiss="alert")
+            span.closeAlert.pull-right.glyphicon.glyphicon-remove
+else
+    div.alert.alert-dismissable.alert-danger #{message}
+        button.close(type="button", data-dismiss="alert")
+            span.closeAlert.pull-right.glyphicon.glyphicon-remove

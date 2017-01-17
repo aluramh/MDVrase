@@ -59,7 +59,9 @@ exports.addCar = function (req, res, next) {
         connection.query(queryString, escapeData, function (err, rows) {
             if (err) throw err;
             connection.release();
-            next(req, res, "Se agrego el vehiculo exitosamente.");
+            req.flash('success', 'true');
+            req.flash('message', 'Se agrego el vehiculo exitosamente.');
+            next(req, res);
         });
     });
 };

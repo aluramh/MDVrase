@@ -9,6 +9,10 @@ block content
         li #[a(data-toggle="tab", href="#empresasResources") Empresas]
 
     div.jumbotron.jumbotron-fluid
+        //- Show message alert, if there's any in Flash-connect
+        if message.length > 0
+            include common/alertMessages
+
         div.tab-content
             div#marcasResources.tab-pane.fade.in.active
                 h2.text-center Agregar marca de vehiculos
@@ -76,6 +80,5 @@ block content
                                         td #{empresa.id_empresa}
                                         td #{empresa.nombre_empresa}
                                         td #{empresa.rfc}
-
 
 block additionalScripts

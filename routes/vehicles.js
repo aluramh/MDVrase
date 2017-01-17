@@ -27,7 +27,10 @@ router.get('/add', function (req, res) {
     //Declare variable for template date
     var templateData = {
         title: 'Agregar vehiculos',
-        loggedIn: req.isAuthenticated()
+        loggedIn: req.isAuthenticated(),
+        //Pass flash messages, if there are any
+        message: req.flash('message'),
+        success: req.flash('success')
     };
     //Retrieve empresas
     resourcesController.getEmpresas(req, res, templateData, function proceedToGetMarcas(req, res, templateData, rows) {
@@ -42,8 +45,8 @@ router.get('/add', function (req, res) {
 });
 
 router.post('/add', function (req, res) {
-    vehiclesController.addCar(req, res, function renderAddCarSuccessPage(req, res, message) {
-        res.send(message);
+    vehiclesController.addCar(req, res, function redirectWithSuccessMessage(req, res) {
+        res.redirect('/vehicles/add');
     });
 });
 

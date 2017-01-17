@@ -15,8 +15,11 @@ exports.addMarca = function (req, res, next) {
             if (err) throw err;
             //If there is an element in Array, the item already exists
             if (rows.length > 0) {
+                connection.release();
                 //Execute callback function with error message
-                next(req, res, "Esta marca ya existe en la base de datos.");
+                req.flash('message', "Esta marca ya existe en la base de datos.");
+                req.flash('success', "false");
+                next(req, res);
             } else {
                 //If array is empty, the item can be added
                 connection.query("INSERT INTO marcas (nombre_marca) VALUES (?)", [req.body.marca], function (err) {
@@ -25,7 +28,9 @@ exports.addMarca = function (req, res, next) {
                     //Release connection to connection pool
                     connection.release();
                     //Execute callback function with success message
-                    next(req, res, "La marca fue agregada exitosamente!");
+                    req.flash('message', "La marca fue agregada exitosamente!");
+                    req.flash('success', "true");
+                    next(req, res);
                 });
             }
         });
@@ -42,7 +47,9 @@ exports.addEmpresa = function (req, res, next) {
                 connection.query("INSERT INTO empresas (nombre_empresa, rfc) VALUES (?, ?)", [req.body.empresa, req.body.rfc], function (err) {
                     if (err) throw err;
                     connection.release();
-                    next(req, res, "La empresa fue agregada exitosamente!");
+                    req.flash('message', "La empresa fue agregada exitosamente!");
+                    req.flash('success', "true");
+                    next(req, res);
                 });
             }
         });

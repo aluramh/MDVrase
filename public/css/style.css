@@ -1,8 +1,9 @@
 body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-    color: rgb(255, 255, 255);
-    background-color: rgb(50, 50, 50) !important;
+    /*color: rgb(255, 255, 255);
+    background-color: rgb(50, 50, 50) !important;*/
     word-wrap: break-word;
+    padding-top: 65px;
 }
 
 a {
@@ -48,11 +49,22 @@ valid {
     cursor: pointer;
 }
 
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:hover,
+.nav-tabs>li.active>a:focus {
+    background-color: #303030 !important;
+}
+
 .jumbotron {
-    background-color: rgb(20, 20, 20);
-    color: #fff;
+    /*background-color: rgb(20, 20, 20);
+    color: #fff;*/
+    border-radius: 0px !important;
 }
 
 .placeholder-select {
     color: rgb(153, 153, 153);
+}
+
+.closeAlert {
+    cursor: pointer;
 }

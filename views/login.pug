@@ -7,7 +7,7 @@ block content
                 <span class="fa fa-sign-in"></span> Login</h1>
             //- Show message alert, if there's any in Flash-connect
             if message.length > 0
-                div.alert.alert-danger #{message}
+                include common/alertMessages
 
             //- Login form
             form#loginForm(action="/login", method="post")
