@@ -7,7 +7,7 @@ exports.getCompanies = function (req, res, next) {
     pool.getConnection(function (err, connection) {
         if (err) throw err;
         //SQL to get queries
-        queryString = "SELECT * FROM empresas";
+        var queryString = "SELECT * FROM empresas";
         //Execute query and throw errors OR return request
         connection.query(queryString, function (err, rows) {
             if (err) throw err;

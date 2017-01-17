@@ -6,6 +6,14 @@ $(function () {
         autoclose: true
     });
 
+    $('.yearPicker').datepicker({
+        language: 'es',
+        autoclose: true,
+        format: "yyyy", // Notice the Extra space at the beginning
+        viewMode: "years",
+        minViewMode: "years"
+    });
+
     // Customize MomentJS to use spanish date format
     moment.locale('es-mx');
 

@@ -31,8 +31,13 @@ valid {
     color: #555;
 }
 
-.vertical-aligned-trow {
+.vertical-aligned-trow>th,
+.vertical-aligned-trow>td {
     vertical-align: middle !important;
+}
+
+.vertical-aligned-trow>th {
+    text-align: center;
 }
 
 .custom-trow:hover {

@@ -44,9 +44,21 @@ router.get('/add', function (req, res) {
     });
 });
 
+// delete FROM `carros_polizas` where 1; delete from polizas where 1;
+
 router.post('/add', function (req, res) {
-    vehiclesController.addCar(req, res, function redirectWithSuccessMessage(req, res) {
-        res.redirect('/vehicles/add');
+    vehiclesController.addCar(req, res, function proceedToAddPoliza(req, res) {
+        //Empty flash messages by calling them
+        console.log(req.flash('message'));
+        console.log(req.flash('success'));
+        vehiclesController.addPoliza(req, res, function proceedToLinkCarWithPoliza(req, res) {
+            //Empty flash messages by calling them
+            console.log(req.flash('message'));
+            console.log(req.flash('success'));
+            vehiclesController.addCarLinkWithPoliza(req, res, function renderPageWithSuccessMessage(req, res) {
+                res.redirect('/vehicles/add');
+            });
+        });
     });
 });
 

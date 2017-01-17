@@ -7,6 +7,7 @@ block content
     ul.nav.nav-tabs
         li.active #[a(data-toggle="tab", href="#marcasResources") Marcas]
         li #[a(data-toggle="tab", href="#empresasResources") Empresas]
+        li #[a(data-toggle="tab", href="#polizasResources") Polizas]
 
     div.jumbotron.jumbotron-fluid
         //- Show message alert, if there's any in Flash-connect
@@ -27,7 +28,7 @@ block content
                                     button.btn.btn-primary(type="submit") Agregar
 
                 
-                h3.text-center Lista de marcas
+                h2.text-center Lista de marcas
                 div.row
                     div.col-md-offset-2.col-md-8
                         table.table.table-bordered
@@ -66,7 +67,7 @@ block content
                                 div.form-group
                                         button.btn.btn-primary(type="submit") Agregar
 
-                h3.text-center Lista de empresas
+                h2.text-center Lista de empresas
                 div.row
                     div.col-md-offset-2.col-md-8
                         table.table.table-bordered
@@ -81,4 +82,52 @@ block content
                                         td #{empresa.nombre_empresa}
                                         td #{empresa.rfc}
 
+            div#polizasResources.tab-pane.fade
+                h2.text-center Lista de polizas
+                div.row
+                    div.col-md-offset-2.col-md-8
+                        table.table.table-bordered
+                            thead
+                                tr.vertical-aligned-trow
+                                    th No. de poliza
+                                    th Fecha de expedicion
+                                    th Fecha de vencimiento
+                                    th Aseguradora
+                                    th Vehiculo
+                                    th Placas del vehiculo
+                            tbody
+                                each poliza in polizas
+                                    tr.custom-trow.vertical-aligned-trow
+                                        td #{poliza.num_poliza}
+                                        td #{poliza.fecha_expedicion}
+                                        td #{poliza.fecha_vencimiento}
+                                        td #{poliza.aseguradora}
+                                        td #[a(href="/vehicles/" + poliza.id_carro) #{poliza.modelo} #{poliza.color} #{poliza.year}]
+                                        td #{poliza.num_placa}
+                            //- /*
+                            //- num_poliza
+                            //- id_carro
+                            //- poliza_actual
+                            //- id_carro
+                            //- empresa
+                            //- num_placa
+                            //- foto_vehiculo
+                            //- color
+                            //- modelo
+                            //- marca
+                            //- year
+                            //- num_serie
+                            //- fecha_obtenido
+                            //- equipo_extra
+                            //- descripcion
+                            //- conductor
+                            //- num_poliza
+                            //- fecha_vencimiento
+                            //- fecha_expedicion
+                            //- aseguradora
+                            //- */
+
 block additionalScripts
+    script(src="/plugins/js/moment-with-locales.min.js")
+    //- script(src="/plugins/js/bootstrap-datepicker.min.js")
+    //- script(src="/plugins/js/bootstrap-datepicker.es.min.js")

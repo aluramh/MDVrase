@@ -5,7 +5,7 @@ exports.getCars = function (req, res, next) {
     pool.getConnection(function (err, connection) {
         if (err) throw err;
         //SQL to get queries
-        queryString = `SELECT * FROM carros 
+        var queryString = `SELECT * FROM carros 
                    LEFT JOIN marcas ON marca = id_marca
                    LEFT JOIN modelos ON modelo = id_modelo
                    LEFT JOIN empresas ON empresa = id_empresa
@@ -15,6 +15,50 @@ exports.getCars = function (req, res, next) {
             if (err) throw err;
             connection.release();
             next(req, res, rows);
+        });
+    });
+};
+
+exports.addPoliza = function (req, res, next) {
+    //Get connection from the pool
+    pool.getConnection(function (err, connection) {
+        if (err) throw err;
+
+        ///ADD CODE TO DEAL WITH DUPLICATE ENTRIES --------------------------------------------------------------------------
+        //ADD CODE (END)
+
+        //Set up query for adding Poliza to DB
+        var escapeData = [req.body.poliza, req.body.vencimiento, req.body.expedicion, req.body.aseguradora];
+        var queryString = `INSERT INTO polizas (num_poliza, fecha_vencimiento, fecha_expedicion, aseguradora) VALUES (?, ?, ?, ?)`;
+
+        //Execute query for adding poliza to DB
+        connection.query(queryString, escapeData, function (err, rows) {
+            if (err) throw err;
+            connection.release();
+
+            req.flash('success', 'true');
+            req.flash('message', 'Se agrego la poliza exitosamente.');
+            next(req, res);
+        });
+    });
+};
+
+exports.addCarLinkWithPoliza = function (req, res, next) {
+    pool.getConnection(function (err, connection) {
+        if (err) throw err;
+
+        //Set up query for linking poliza to car inside DB
+        escapeData = [req.body.poliza, req.body.id_carro, 1];
+        queryString = `INSERT INTO carros_polizas (num_poliza, id_carro, poliza_actual) VALUES (?,?,?)`;
+
+        //Execute up query for linking poliza to car inside DB
+        connection.query(queryString, escapeData, function (err, rows) {
+            if (err) throw err;
+            connection.release();
+
+            req.flash('success', 'true');
+            req.flash('message', 'Se agrego el vehiculo y su poliza exitosamente.');
+            next(req, res);
         });
     });
 };
@@ -52,13 +96,17 @@ exports.addCar = function (req, res, next) {
         ];
 
         //SQL to get queries
-        queryString = `INSERT INTO carros(empresa, num_placa, foto_vehiculo, color, modelo, marca, year,
+        var queryString = `INSERT INTO carros(empresa, num_placa, foto_vehiculo, color, modelo, marca, year,
             num_serie, fecha_obtenido, equipo_extra, descripcion, conductor)
             VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`;
         //Execute query and throw errors OR return request
         connection.query(queryString, escapeData, function (err, rows) {
             if (err) throw err;
             connection.release();
+            //Add ID of newly inserted vehicle in case it is required in the future.
+            req.body.id_carro = rows.insertId;
+
+            //Send flash messages for success alerts
             req.flash('success', 'true');
             req.flash('message', 'Se agrego el vehiculo exitosamente.');
             next(req, res);

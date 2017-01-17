@@ -77,3 +77,29 @@ exports.getEmpresas = function (req, res, resultsObject, next) {
         });
     });
 };
+
+exports.getPolizas = function (req, res, resultsObject, next) {
+    //Get connection to DB from connection pool
+    pool.getConnection(function (err, connection) {
+        if (err) throw err;
+
+        var queryString = `
+            SELECT 
+                *,
+                DATE_FORMAT(fecha_expedicion, '%Y-%m-%dT%TZ') AS fecha_expedicion,
+                DATE_FORMAT(fecha_vencimiento, '%Y-%m-%dT%TZ') AS fecha_vencimiento
+            FROM carros_polizas
+            LEFT JOIN carros
+                ON carros_polizas.id_carro = carros.id_carro
+            LEFT JOIN polizas
+                ON carros_polizas.num_poliza = polizas.num_poliza
+            WHERE 1`;
+
+        connection.query(queryString, function (err, rows) {
+            if (err) throw err;
+            connection.release();
+
+            next(req, res, resultsObject, rows);
+        });
+    });
+};

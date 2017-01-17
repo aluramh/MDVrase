@@ -8,7 +8,7 @@ block content
         //- Show message alert, if there's any in Flash-connect
         if message.length > 0
             include common/alertMessages
-            
+
         form#carForm(action="/vehicles/add", method="post")
             h3.text-center Informacion del vehiculo
             div.vehicleInformationContainer
@@ -27,9 +27,10 @@ block content
                     div.col-md-offset-1.col-md-5.col-sm-6.col-xs-12.form-group
                         label(for="color") Color:
                         input#color.form-control(type="text", name="color", placeholder="Color del vehiculo", required)
+                    //- Date picker for only years 
                     div.col-md-5.col-sm-6.col-xs-12.form-group
                         label(for="year") Año:
-                        div.input-group.date.esDatePicker(data-provide="datepicker")
+                        div.input-group.date.yearPicker(data-provide="datepicker")
                             input#year.form-control(type="text", name="year", placeholder="Año del vehiculo", required)
                             div.input-group-addon #[span.glyphicon.glyphicon-th]
                 div.row

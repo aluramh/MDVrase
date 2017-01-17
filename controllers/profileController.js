@@ -7,7 +7,7 @@ exports.getUserInfo = function (req, res, next) {
         //Check if there's an error when connecting
         if (err) throw err;
         //Else, declare query to execute
-        queryString = `SELECT * FROM usuarios 
+        var queryString = `SELECT * FROM usuarios 
                    LEFT JOIN empresas ON empresa = id_empresa
                    LEFT JOIN roles ON rol = id_rol
                    WHERE id_usuario = ?`;
