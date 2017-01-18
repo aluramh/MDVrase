@@ -73,3 +73,31 @@ valid {
 .closeAlert {
     cursor: pointer;
 }
+
+label {
+    font-size: 13px;
+}
+
+.actions-container {
+    white-space: nowrap;
+    width: 43px;
+}
+
+footer {
+    border-top: 1px solid gray;
+    padding-top: 40px;
+}
+
+.nav-justified>li {
+    display: table-cell;
+    width: 1%;
+}
+
+.nav-pills>li>a {
+    border-radius: 0px;
+    border: 1px solid #375a7f;
+}
+
+.nav-justified>li>a {
+    margin-bottom: 0;
+}

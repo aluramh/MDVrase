@@ -1,0 +1,29 @@
+div.row
+    div.col-md-offset-2.col-md-4.col-sm-6.col-xs-12.form-group
+        label(for="poliza") No. de poliza:
+        input#poliza.form-control(type="text", name="poliza", placeholder="No. de poliza", required)
+    
+    div.col-md-4.col-sm-6.col-xs-12.form-group
+        label(for="aseguradora") Aseguradora:
+        input#aseguradora.form-control(type="text", name="aseguradora", placeholder="Nombre de aseguradora", required)
+div.row
+    div.col-md-offset-2.col-md-4.col-sm-6.col-xs-12.form-group
+        div.row
+            div.col-md-6.col-sm-6.col-xs-6
+                label(for="expedicion") Expedicion:
+                div.input-group.date.esDatePicker(data-provide="datepicker")
+                    input#expedicion.form-control(type="text", name="expedicion", placeholder="Fecha de expedicion", required)
+                    div.input-group-addon #[span.glyphicon.glyphicon-th]
+            
+            div.col-md-6.col-sm-6.col-xs-6
+                label(for="vencimiento") Vencimiento:
+                div.input-group.date.esDatePicker(data-provide="datepicker")
+                    input#vencimiento.form-control(type="text", name="vencimiento", placeholder="Fecha de vencimiento", required)
+                    div.input-group-addon #[span.glyphicon.glyphicon-th]
+    if carros
+        div.col-md-4.col-sm-6.col-xs-12.form-group
+            label(for="id_carro") Vehiculo:
+            select#id_carro.form-control(name="id_carro", required)
+                option(value="", selected, disabled) Selecciona el vehiculo de la poliza
+                each carro in carros
+                    option(value=carro.id_carro) #{carro.modelo} #{carro.color} #{carro.year} (#{carro.num_placa})

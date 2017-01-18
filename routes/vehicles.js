@@ -4,14 +4,14 @@ var passport = require('passport');
 var router = express.Router();
 var auth = require('./authenticate');
 var vehiclesController = require('./../controllers/vehiclesController');
-var currentPageHelper = require('./../helpers/templateFunctions');
+var hf = require('./../helpers/helperFunctions');
 
 //Require authentication for each route
 router.use(auth.isLoggedIn);
 
 router.get('/', function (req, res) {
     //Get list of all available cars
-    vehiclesController.getCars(req, res, function renderVehiclesPage(req, res, vehiclesData) {
+    vehiclesController.getCars(req, res, null, function renderVehiclesPage(req, res, empty, vehiclesData) {
         // render the page and pass in any flash data if it exists
         res.render('vehicles.pug', {
             title: 'Vehiculos',
@@ -49,12 +49,10 @@ router.get('/add', function (req, res) {
 router.post('/add', function (req, res) {
     vehiclesController.addCar(req, res, function proceedToAddPoliza(req, res) {
         //Empty flash messages by calling them
-        console.log(req.flash('message'));
-        console.log(req.flash('success'));
+        hf.flushFlashConnect(req, res);
         vehiclesController.addPoliza(req, res, function proceedToLinkCarWithPoliza(req, res) {
             //Empty flash messages by calling them
-            console.log(req.flash('message'));
-            console.log(req.flash('success'));
+            hf.flushFlashConnect(req, res);
             vehiclesController.addCarLinkWithPoliza(req, res, function renderPageWithSuccessMessage(req, res) {
                 res.redirect('/vehicles/add');
             });

@@ -1,6 +1,6 @@
 var pool = require('./../config/databaseConnectionPool');
 
-exports.getCars = function (req, res, next) {
+exports.getCars = function (req, res, resultsObject, next) {
     //Get connection to DB from connection pool
     pool.getConnection(function (err, connection) {
         if (err) throw err;
@@ -14,7 +14,7 @@ exports.getCars = function (req, res, next) {
         connection.query(queryString, function (err, rows) {
             if (err) throw err;
             connection.release();
-            next(req, res, rows);
+            next(req, res, resultsObject, rows);
         });
     });
 };

@@ -12,96 +12,17 @@ block content
         form#carForm(action="/vehicles/add", method="post")
             h3.text-center Informacion del vehiculo
             div.vehicleInformationContainer
-                div.row
-                    div.col-md-offset-1.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="modelo") Modelo:
-                        input#modelo.form-control(type="text", name="modelo", placeholder="Modelo del vehiculo", required)
-                        
-                    div.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="marca") Marca:
-                        select#marca.form-control(name="marca", required)
-                            option(value="", selected, disabled) Selecciona la marca del vehiculo
-                            each marca in marcas
-                                option(value=marca.id_marca) #{marca.nombre_marca}
-                div.row
-                    div.col-md-offset-1.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="color") Color:
-                        input#color.form-control(type="text", name="color", placeholder="Color del vehiculo", required)
-                    //- Date picker for only years 
-                    div.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="year") Año:
-                        div.input-group.date.yearPicker(data-provide="datepicker")
-                            input#year.form-control(type="text", name="year", placeholder="Año del vehiculo", required)
-                            div.input-group-addon #[span.glyphicon.glyphicon-th]
-                div.row
-                    div.col-md-offset-1.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="empresa") Empresa:
-                        select#empresa.form-control(name="empresa", required)
-                            option(value="", selected, disabled) Selecciona la empresa del vehiculo
-                            each empresa in empresas
-                                option.valid(value=empresa.id_empresa) #{empresa.nombre_empresa}
+                include common/forms/vehicleForm
 
-                    div.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="placa") No. de placa:
-                        input#placa.form-control(type="text", name="placa", placeholder="Placas del vehiculo", required)
-
-                div.row
-                    div.col-md-offset-1.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="serie") No. de serie:
-                        input#serie.form-control(type="text", name="serie", placeholder="No. de serie del vehiculo", required)
-
-                    div.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="fechaObtenido") Fecha obtenido:
-                        div.input-group.date.esDatePicker(data-provide="datepicker")
-                            input#fechaObtenido.form-control(type="text", name="fechaObtenido", placeholder="Fecha que se obtuvo", required)
-                            div.input-group-addon #[span.glyphicon.glyphicon-th]
-                
-                div.row
-                    div.col-md-offset-1.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="conductor") Nombre del conductor:
-                        input#conductor.form-control(type="text", name="conductor", placeholder="Nombre del conductor", required)
-                    div.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="foto") Foto de vehiculo:
-                        input#foto.form-control(type="text", name="foto", placeholder="Upload a file")
-                
-                div.row
-                    div.col-md-offset-1.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="descripcion") Descripcion del vehiculo:
-                        textarea#descripcion.form-control(name="descripcion", rows="5")
-                    div.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="equipoExtra") Equipo extra:
-                        textarea#equipoExtra.form-control(name="equipoExtra", rows="5")
-
-                
-                
             h3.text-center Informacion de la poliza
             div.polizaInformationContainer
-                div.row
-                    div.col-md-offset-1.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="poliza") No. de poliza:
-                        input#poliza.form-control(type="text", name="poliza", placeholder="No. de poliza", required)
-                    div.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="aseguradora") Aseguradora:
-                        input#aseguradora.form-control(type="text", name="aseguradora", placeholder="Nombre de aseguradora", required)
-                div.row
-                    div.col-md-offset-1.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="expedicion") Fecha de expedicion:
-                        div.input-group.date.esDatePicker(data-provide="datepicker")
-                            input#expedicion.form-control(type="text", name="expedicion", placeholder="Fecha de expedicion", required)
-                            div.input-group-addon #[span.glyphicon.glyphicon-th]
-                    
-                    div.col-md-5.col-sm-6.col-xs-12.form-group
-                        label(for="vencimiento") Fecha de vencimiento:
-                        div.input-group.date.esDatePicker(data-provide="datepicker")
-                            input#vencimiento.form-control(type="text", name="vencimiento", placeholder="Fecha de vencimiento", required)
-                            div.input-group-addon #[span.glyphicon.glyphicon-th]
+                include common/forms/polizaForm
 
-            div.form-group.row
-                div.col-md-offset-1.col-md-12
-                    button.btn.btn-primary(type="submit") Agregar vehiculo
+            div.form-group.row.text-center
+                button.btn.btn-primary(type="submit") Agregar vehiculo
 
 block additionalScripts
-    script(src="/js/vehicleAddPage.js")
+    script(src="/js/datePickerFormat.js")
     script(src="/plugins/js/moment-with-locales.min.js")
     script(src="/plugins/js/bootstrap-datepicker.min.js")
     script(src="/plugins/js/bootstrap-datepicker.es.min.js")

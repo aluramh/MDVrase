@@ -5,9 +5,9 @@ block headerScripts
 
 block content
     ul.nav.nav-tabs
-        li.active #[a(data-toggle="tab", href="#marcasResources") Marcas]
+        li #[a(data-toggle="tab", href="#marcasResources") Marcas]
         li #[a(data-toggle="tab", href="#empresasResources") Empresas]
-        li #[a(data-toggle="tab", href="#polizasResources") Polizas]
+        li.active #[a(data-toggle="tab", href="#polizasResources") Polizas]
 
     div.jumbotron.jumbotron-fluid
         //- Show message alert, if there's any in Flash-connect
@@ -15,7 +15,7 @@ block content
             include common/alertMessages
 
         div.tab-content
-            div#marcasResources.tab-pane.fade.in.active
+            div#marcasResources.tab-pane.fade
                 h2.text-center Agregar marca de vehiculos
                 form#marcaForm(action="/resources/add", method="post")
                     div.row
@@ -82,52 +82,94 @@ block content
                                         td #{empresa.nombre_empresa}
                                         td #{empresa.rfc}
 
-            div#polizasResources.tab-pane.fade
+            div#polizasResources.tab-pane.fade.in.active
+                h2.text-center Agregar polizas
+                form#polizaForm(action="/resources/add", method="post")
+                    textarea(name="formType", style="display:none;" required, readonly="readonly") addPoliza
+                    include common/forms/polizaForm
+                                    
+                    div.form-group.row.text-center
+                        button.btn.btn-primary(type="submit") Agregar poliza
+
                 h2.text-center Lista de polizas
                 div.row
-                    div.col-md-offset-2.col-md-8
-                        table.table.table-bordered
-                            thead
-                                tr.vertical-aligned-trow
-                                    th No. de poliza
-                                    th Fecha de expedicion
-                                    th Fecha de vencimiento
-                                    th Aseguradora
-                                    th Vehiculo
-                                    th Placas del vehiculo
-                            tbody
-                                each poliza in polizas
-                                    tr.custom-trow.vertical-aligned-trow
-                                        td #{poliza.num_poliza}
-                                        td #{poliza.fecha_expedicion}
-                                        td #{poliza.fecha_vencimiento}
-                                        td #{poliza.aseguradora}
-                                        td #[a(href="/vehicles/" + poliza.id_carro) #{poliza.modelo} #{poliza.color} #{poliza.year}]
-                                        td #{poliza.num_placa}
-                            //- /*
-                            //- num_poliza
-                            //- id_carro
-                            //- poliza_actual
-                            //- id_carro
-                            //- empresa
-                            //- num_placa
-                            //- foto_vehiculo
-                            //- color
-                            //- modelo
-                            //- marca
-                            //- year
-                            //- num_serie
-                            //- fecha_obtenido
-                            //- equipo_extra
-                            //- descripcion
-                            //- conductor
-                            //- num_poliza
-                            //- fecha_vencimiento
-                            //- fecha_expedicion
-                            //- aseguradora
-                            //- */
+                    div.col-md-offset-1.col-md-10
+                        ul.nav.nav-pills.nav-justified
+                            li.active #[a(data-toggle="pill", href="#activePolizas") Polizas activas]
+                            li #[a(data-toggle="pill", href="#inactivePolizas") Todas las polizas]
+                    div.tab-content
+                        div#activePolizas.tab-pane.fade.in.active
+                            div.col-md-offset-1.col-md-10.col-xs-12
+                                table.table.table-bordered
+                                    thead
+                                        tr.vertical-aligned-trow
+                                            th No. de poliza
+                                            th Fecha de expedicion
+                                            th Fecha de vencimiento
+                                            th Aseguradora
+                                            th Vehiculo
+                                            th.actions-container
+                                    tbody
+                                        each poliza in polizas
+                                            tr.custom-trow.vertical-aligned-trow
+                                                td #{poliza.num_poliza}
+                                                td #{poliza.fecha_expedicion}
+                                                td #{poliza.fecha_vencimiento}
+                                                td #{poliza.aseguradora}
+                                                td #[a(href="/vehicles/" + poliza.id_carro) #{poliza.modelo} #{poliza.color} #{poliza.year} (#{poliza.num_placa})]
+                                                td.actions-container
+                                                    div.btn-group-vertical.btn-group-xs(role="group")
+                                                        button.btn.btn-warning #[span.glyphicon.glyphicon-edit]
+                                                        button.btn.btn-danger #[span.glyphicon.glyphicon-remove-sign]  
 
+                                    //- /*
+                                    //- num_poliza
+                                    //- id_carro
+                                    //- poliza_actual
+                                    //- id_carro
+                                    //- empresa
+                                    //- num_placa
+                                    //- foto_vehiculo
+                                    //- color
+                                    //- modelo
+                                    //- marca
+                                    //- year
+                                    //- num_serie
+                                    //- fecha_obtenido
+                                    //- equipo_extra
+                                    //- descripcion
+                                    //- conductor
+                                    //- num_poliza
+                                    //- fecha_vencimiento
+                                    //- fecha_expedicion
+                                    //- aseguradora
+                                    //- */
+                        //- List all the polizas that have already expired and are no longer active
+                        div#inactivePolizas.tab-pane.fade
+                            div.col-md-offset-1.col-md-10.col-xs-12
+                                table.table.table-bordered
+                                    thead
+                                        tr.vertical-aligned-trow
+                                            th No. de poliza
+                                            th Fecha de expedicion
+                                            th Fecha de vencimiento
+                                            th Aseguradora
+                                            th Vehiculo
+                                            th.actions-container
+                                    tbody
+                                        each poliza in polizas
+                                            tr.custom-trow.vertical-aligned-trow
+                                                td #{poliza.num_poliza}
+                                                td #{poliza.fecha_expedicion}
+                                                td #{poliza.fecha_vencimiento}
+                                                td #{poliza.aseguradora}
+                                                td #[a(href="/vehicles/" + poliza.id_carro) #{poliza.modelo} #{poliza.color} #{poliza.year} (#{poliza.num_placa})]
+                                                td.actions-container
+                                                    div.btn-group-vertical.btn-group-xs(role="group")
+                                                        button.btn.btn-warning #[span.glyphicon.glyphicon-edit]
+                                                        button.btn.btn-danger #[span.glyphicon.glyphicon-trash] 
 block additionalScripts
+    script(src="/js/datePickerFormat.js")
     script(src="/plugins/js/moment-with-locales.min.js")
-    //- script(src="/plugins/js/bootstrap-datepicker.min.js")
-    //- script(src="/plugins/js/bootstrap-datepicker.es.min.js")
+    script(src="/plugins/js/bootstrap-datepicker.min.js")
+    script(src="/plugins/js/bootstrap-datepicker.es.min.js")

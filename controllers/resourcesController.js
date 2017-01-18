@@ -8,6 +8,28 @@ var connection = mysql.createConnection(dbconfig.connection);
 //Use database
 connection.query('USE ' + dbconfig.database);
 
+exports.getMarcas = function (req, res, resultsObject, next) {
+    pool.getConnection(function (err, connection) {
+        connection.query("SELECT * FROM marcas WHERE 1", function (err, rows) {
+            if (err) throw err;
+            connection.release();
+            next(req, res, resultsObject, rows);
+        });
+    });
+};
+
+exports.getEmpresas = function (req, res, resultsObject, next) {
+    //Get connection to DB from connection pool
+    pool.getConnection(function (err, connection) {
+        if (err) throw err;
+        connection.query("SELECT * FROM empresas WHERE 1", function (err, rows) {
+            if (err) throw err;
+            connection.release();
+            next(req, res, resultsObject, rows);
+        });
+    });
+};
+
 exports.addMarca = function (req, res, next) {
     pool.getConnection(function (err, connection) {
         connection.query("SELECT * FROM marcas WHERE nombre_marca = ?", [req.body.marca], function (err, rows) {
@@ -52,28 +74,6 @@ exports.addEmpresa = function (req, res, next) {
                     next(req, res);
                 });
             }
-        });
-    });
-};
-
-exports.getMarcas = function (req, res, resultsObject, next) {
-    pool.getConnection(function (err, connection) {
-        connection.query("SELECT * FROM marcas WHERE 1", function (err, rows) {
-            if (err) throw err;
-            connection.release();
-            next(req, res, resultsObject, rows);
-        });
-    });
-};
-
-exports.getEmpresas = function (req, res, resultsObject, next) {
-    //Get connection to DB from connection pool
-    pool.getConnection(function (err, connection) {
-        if (err) throw err;
-        connection.query("SELECT * FROM empresas WHERE 1", function (err, rows) {
-            if (err) throw err;
-            connection.release();
-            next(req, res, resultsObject, rows);
         });
     });
 };
