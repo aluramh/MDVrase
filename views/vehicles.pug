@@ -12,22 +12,24 @@ block content
         div.col-md-9
             div.row
                 each vehicle in vehicles
-                    div.col-sm-6.col-lg-6.col-md-6
+                    div.col-sm-6.col-md-4.col-lg-4
                         div.thumbnail(redirect = "/vehicles/" + vehicle.id_carro)
                             img.thumbnail-image(src="/uploads/" + (vehicle.foto_vehiculo != null ? vehicle.foto_vehiculo : "/no_image.jpg"))
 
                             div.caption
-                                h4.pull-right.marca-carro #{vehicle.nombre_marca}
-                                h4 #{vehicle.modelo} #{vehicle.color} #{vehicle.year}
-                                p 
-                                    strong #{vehicle.nombre_empresa}
-                                    br
-                                    span #{vehicle.num_placa}
-                                    br
+                                div.row.nombre-carro
+                                    div.col-md-8
+                                        span #{vehicle.modelo} #{vehicle.color} #{vehicle.year} (#{vehicle.num_placa})
+                                    div.col-md-4.aright.hidden-xs.hidden-sm
+                                        span.marca-carro #{vehicle.nombre_empresa}
+                                    div.col-md-4.hidden-md.hidden-lg
+                                        span.marca-carro #{vehicle.nombre_empresa}
+
+                                p.description 
                                     if vehicle.descripcion == null
-                                        i No hay descripción disponible.
+                                        span No hay descripción disponible.
                                     else
-                                        i #{vehicle.descripcion}
+                                        span #{vehicle.descripcion}
 
 block additionalScripts
     script(src="/js/vehicleListPage.js")

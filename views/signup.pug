@@ -8,31 +8,9 @@ block content
             if message.length > 0
                 div.alert.alert-danger #{message}
 
-            //- Login form
+            //- Signup form
             form(action="/signup", method="post")
-                div.form-group
-                    label Username
-                    input.form-control(type="text", name="username", placeholder="Nombre de usuario para hacer login", required)
-                div.form-group
-                    label Contraseña
-                    input.form-control(type="password", name="password", placeholder="Contraseña de la cuenta", required)
-                div.form-group
-                    label Nombre
-                    input.form-control(type="text", name="nombre", placeholder="Nombre completo", required)
-                div.form-group
-                    label Empresa
-                    select.form-control(name="empresa", placeholder="", required)
-                        option(value="", selected, disabled) Selecciona la empresa que corresponde
-                        each company in companies
-                            option(value=company.id_empresa) #{company.nombre_empresa}
-                div.form-group
-                    label.checkbox-inline
-                        input(type="checkbox", value=1)
-                        span Administrator?&nbsp;
-
-                    label.checkbox-inline
-                        input(type="checkbox", value=1) 
-                        span Active user?&nbsp;
+                include forms/signupForm
 
                 button.btn.btn-warning.btn-lg(type="submit") Sign up
 

@@ -1,0 +1,40 @@
+extends common/layout
+
+block content
+    div.jumbotron.jumbotron-fluid
+        //- Show message alert, if there's any in Flash-connect
+        if message
+            if message.length > 0
+                include common/alertMessages
+        
+        h2.text-center Registrar usuario
+        //- Signup form
+        div.row
+            div.col-md-8.col-md-offset-2
+                form(action="/signup/admin", method="post")
+                    include forms/signupForm
+                    button.btn.btn-warning.btn-md(type="submit") Agregar usuario
+
+        h2.text-center Lista de usuarios
+
+        table.table.table-bordered
+            thead
+                tr.vertical-aligned-trow
+                    th ID de usuario
+                    th Nombre
+                    th Username
+                    th Empresa
+                    th Rol
+                    th.actions-container
+            tbody
+                each usuario in usuarios
+                    tr.custom-trow.vertical-aligned-trow
+                        td #{usuario.id_usuario}
+                        td #{usuario.nombre}
+                        td #{usuario.username}
+                        td #{usuario.nombre_empresa}
+                        td #{usuario.nombre_rol}
+                        td.actions-container
+                            div.btn-group-vertical.btn-group-xs(role="group")
+                                button.btn.btn-warning #[span.glyphicon.glyphicon-edit]
+                                button.btn.btn-danger #[span.glyphicon.glyphicon-remove-sign]  

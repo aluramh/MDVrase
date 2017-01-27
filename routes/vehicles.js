@@ -60,6 +60,22 @@ router.post('/add', function (req, res) {
     });
 });
 
+router.get('/:vehicleId', function (req, res) {
+    //Get list of all available cars
+    vehiclesController.getCarFromId(req, res, null, function renderVehiclesPage(req, res, empty, vehicleInfo) {
+        // //Replace line breaks with <br>
+        // vehicleInfo[0].descripcion = hf.nl2br(vehicleInfo[0].descripcion);
+        // vehicleInfo[0].equipo_extra = hf.nl2br(vehicleInfo[0].equipo_extra);
+
+        // render the page and pass in any flash data if it exists
+        res.render('vehiclesId.pug', {
+            title: 'Vehiculos',
+            vehicle: vehicleInfo[0],
+            loggedIn: req.isAuthenticated()
+        });
+    });
+});
+
 module.exports = router;
 
 /* Datos basicos para un nuevo vehiculo

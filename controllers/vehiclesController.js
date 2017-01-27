@@ -1,15 +1,35 @@
 var pool = require('./../config/databaseConnectionPool');
 
+exports.getCarFromId = function (req, res, resultsObject, next) {
+    pool.getConnection(function (err, connection) {
+        if (err) throw err;
+        //SQL to get queries
+        var queryString = `
+            SELECT * FROM carros 
+            LEFT JOIN marcas ON marca = id_marca
+            LEFT JOIN modelos ON modelo = id_modelo
+            LEFT JOIN empresas ON empresa = id_empresa
+            WHERE id_carro = ?`;
+        //Execute query and throw errors OR return request
+        connection.query(queryString, [req.params.vehicleId], function (err, rows) {
+            if (err) throw err;
+            connection.release();
+            next(req, res, resultsObject, rows);
+        });
+    });
+};
+
 exports.getCars = function (req, res, resultsObject, next) {
     //Get connection to DB from connection pool
     pool.getConnection(function (err, connection) {
         if (err) throw err;
         //SQL to get queries
-        var queryString = `SELECT * FROM carros 
-                   LEFT JOIN marcas ON marca = id_marca
-                   LEFT JOIN modelos ON modelo = id_modelo
-                   LEFT JOIN empresas ON empresa = id_empresa
-                   WHERE 1`;
+        var queryString = `
+            SELECT * FROM carros 
+            LEFT JOIN marcas ON marca = id_marca
+            LEFT JOIN modelos ON modelo = id_modelo
+            LEFT JOIN empresas ON empresa = id_empresa
+            WHERE 1`;
         //Execute query and throw errors OR return request
         connection.query(queryString, function (err, rows) {
             if (err) throw err;

@@ -1,0 +1,56 @@
+extends common/layout
+
+block content
+    div.jumbotron.jumbotron-fluid
+        if vehicle
+            ol.breadcrumb
+                li.breadcrumb-item #[a(href="/vehicles") Vehiculos]
+                li.breadcrumb-item.active #{vehicle.modelo} #{vehicle.year} (#{vehicle.num_placa}) 
+
+        h2 #{vehicle.nombre_marca} #{vehicle.modelo} #{vehicle.year} (#{vehicle.num_placa}) 
+
+        div.text-center
+            img(src="/uploads/" + (vehicle.foto_vehiculo != null ? vehicle.foto_vehiculo : "/no_image.jpg"), style="width:60%;")
+        
+        div.row
+            div.col-md-12
+                h2 Información del vehiculo
+        div.row
+            div.col-md-offset-1.col-md-3
+                div.car-description.text-center
+                    table.table.table-condensed
+                        tr
+                            td.light Marca: 
+                            td.aleft #{vehicle.nombre_marca} <br>
+                        tr
+                            td.light Modelo: 
+                            td.aleft #{vehicle.modelo} <br>
+                        tr
+                            td.light Año: 
+                            td.aleft #{vehicle.year}
+
+            div.col-md-3
+                div.car-description.text-center
+                    table.table.table-condensed
+                        tr
+                            td.light Placas: 
+                            td.aleft #{vehicle.num_placa} <br>
+                        tr
+                            td.light No. de poliza: 
+                            td.aleft #{vehicle.modelo} <br>
+                        tr
+                            td.light Aseguradora: 
+                            td.aleft #{vehicle.year}
+            div.col-md-4
+                div.car-description
+                    div.light.aleft Descripción:
+                    p #{vehicle.descripcion}
+
+                    if vehicle.equipo_extra
+                        div.light.aleft.
+                            Equipo extra:
+                        p #{vehicle.equipo_extra}
+        div.row
+            div.col-md-12
+                h2 Facturas recientes
+

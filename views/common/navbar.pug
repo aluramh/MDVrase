@@ -13,20 +13,27 @@ nav.navbar.navbar-default.navbar-fixed-top
             //- Tabs shown when user is logged in
             if loggedIn
                 ul.nav.navbar-nav
-                    li#perfilTab #[a(href="/profile") Perfil]
                     li#vehiculosTab #[a(href="/vehicles") Vehiculos]
+                    li#Facturas #[a(href="#") Facturas]
                     li#recordatoriosTab #[a(href="#") Recordatorios]
                     li#administradorTab
                         a.dropdown-toggle(href="#", data-toggle="dropdown") Admin #[span.caret]
                         ul.dropdown-menu
-                            li#agregarVehiculosTab #[a(href="/vehicles/add") Agregar vehiculo]
-                            li#agregarDatosTab #[a(href="/resources") Agregar datos]
+                            li#agregarVehiculosTab #[a(href="/vehicles/add") Administrar vehiculos]
+                            li#agregarDatosTab #[a(href="/resources") Administrar datos]
+                            li#agregarDatosTab #[a(href="/users") Administrar usuarios]
             
                 ul.nav.navbar-nav.navbar-right
+                    li#perfilTab
+                        a(href="/profile") 
+                            span.glyphicon.glyphicon-user
+                            span &nbsp;Perfil
+
                     li#logoutTab
                         a(href="/logout")
                             span.glyphicon.glyphicon-log-out
                             span &nbsp;Log out
+            
             //- Tabs shown if user hasn't logged in
             unless loggedIn
                 ul.nav.navbar-nav.navbar-right

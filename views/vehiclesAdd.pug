@@ -12,11 +12,11 @@ block content
         form#carForm(action="/vehicles/add", method="post")
             h3.text-center Informacion del vehiculo
             div.vehicleInformationContainer
-                include common/forms/vehicleForm
+                include forms/vehicleForm
 
             h3.text-center Informacion de la poliza
             div.polizaInformationContainer
-                include common/forms/polizaForm
+                include forms/polizaForm
 
             div.form-group.row.text-center
                 button.btn.btn-primary(type="submit") Agregar vehiculo

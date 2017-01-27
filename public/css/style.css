@@ -101,3 +101,23 @@ footer {
 .nav-justified>li>a {
     margin-bottom: 0;
 }
+
+.light {
+    color: rgb(100, 100, 100);
+    text-align: right;
+    font-size: 16px;
+}
+
+.aleft {
+    text-align: left;
+}
+
+.aright {
+    text-align: right;
+}
+
+.description {
+    line-height: 1.2em;
+    height: 3.6em;
+    overflow: hidden;
+}

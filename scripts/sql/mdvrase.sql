@@ -40,7 +40,8 @@ CREATE TABLE IF NOT EXISTS `facturas`(
     descripcion VARCHAR(500),
     pagado TINYINT(1) NOT NULL,
     usuario_que_capturo INT UNSIGNED NOT NULL,
-    fecha DATE NOT NULL,
+    fecha_factura DATE NOT NULL,
+    fecha_capturado DATE,
 
     FOREIGN KEY (empresa) REFERENCES empresas(id_empresa),
     FOREIGN KEY (usuario_que_capturo) REFERENCES usuarios(id_usuario)

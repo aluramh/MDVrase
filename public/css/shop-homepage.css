@@ -61,4 +61,15 @@ footer {
 
 .marca-carro {
     color: rgb(200, 200, 200);
+    font-size: 14px;
+}
+
+.nombre-carro {
+    color: rgb(20, 20, 20);
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.car-description {
+    font-size: 20px
 }

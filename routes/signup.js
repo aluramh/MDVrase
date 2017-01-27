@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 
+var auth = require('./authenticate');
 var router = express.Router();
 var signupController = require('./../controllers/signupController');
 
@@ -27,5 +28,12 @@ router.post('/', passport.authenticate('local-signup', {
     failureRedirect: '/signup', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
 }));
+
+// process the signup form
+router.post('/admin', auth.isLoggedIn, function (req, res) {
+    signupController.registerUser(req, res, function redirectToUsersPage(req, res) {
+        res.redirect('/users');
+    });
+});
 
 module.exports = router;

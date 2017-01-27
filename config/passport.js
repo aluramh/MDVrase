@@ -78,7 +78,7 @@ module.exports = function (passport) {
                             newUserMysql.activo
                         ], function (err, rows) {
                             if (err) throw err;
-                            newUserMysql.id = rows.insertId;
+                            newUserMysql.id_usuario = rows.insertId;
                             return done(null, newUserMysql);
                         });
                     }
