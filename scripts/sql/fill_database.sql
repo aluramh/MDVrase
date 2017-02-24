@@ -9,15 +9,6 @@ INSERT INTO empresas (nombre_empresa, rfc) VALUES
 
 INSERT INTO marcas (nombre_marca) VALUES ("Mazda"), ("Honda"), ("Mitsubishi"), ("KIA"), ("Toyota");
 
-INSERT INTO modelos (nombre_modelo) VALUES
-("Yaris"),
-("Mazda 3"),
-("Mazda 2"),
-("Patriot"),
-("Pathfinder"),
-("Lancer"),
-("Tesla 2");
-
 INSERT INTO carros (
     empresa, 
     num_placa, 

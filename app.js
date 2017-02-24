@@ -19,6 +19,7 @@ var profile = require('./routes/profile');
 var logout = require('./routes/logout');
 var vehicles = require('./routes/vehicles');
 var resources = require('./routes/resources');
+var facturas = require('./routes/facturas');
 
 var app = express();
 
@@ -63,6 +64,7 @@ app.use('/profile', profile);
 app.use('/logout', logout);
 app.use('/vehicles', vehicles);
 app.use('/resources', resources);
+app.use('/facturas', facturas);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

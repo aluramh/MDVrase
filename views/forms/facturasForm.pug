@@ -1,0 +1,36 @@
+div.row
+    div.col-md-6.col-sm-6.col-xs-12.form-group
+        label(for="empresa") Empresa:
+        select#empresa.form-control(name="empresa", required)
+            option(value="", selected, disabled) Selecciona la empresa del vehiculo
+            each empresa in empresas
+                option.valid(value=empresa.id_empresa) #{empresa.nombre_empresa}
+
+    div.col-md-6.col-sm-6.col-xs-12.form-group
+        label(for="aseguradora") Emisor:
+        input#Emisor.form-control(type="text", name="Emisor", placeholder="Emisor de factura", required)
+
+div.row
+    div.col-md-6.col-sm-6.col-xs-12.form-group
+        label(for="costo") Costo:
+        div.input-group
+            span.input-group-addon $
+            input#costo.form-control(type="number", min="0", step="any", name="costo", placeholder="Costo de factura", required)
+    
+    div.col-md-6.col-sm-6.col-xs-12.form-group
+        label(for="fechaFactura") Fecha de factura:
+        div.input-group.date.esDatePicker(data-provide="datepicker")
+            input#fechaFactura.form-control(type="text", name="fechaFactura", placeholder="Fecha de factura", required)
+            div.input-group-addon #[span.glyphicon.glyphicon-th]
+div.row
+    if carros
+        div.col-md-6.col-sm-6.col-xs-12.form-group
+            label(for="id_carro") Vehiculo:
+            select#id_carro.form-control.input-lg(name="id_carro", required)
+                option(value="", selected, disabled) Selecciona el vehiculo de la poliza
+                each carro in carros
+                    option(value=carro.id_carro) #{carro.modelo} #{carro.color} #{carro.year} (#{carro.num_placa})
+
+    div.col-md-6.col-sm-6.col-xs-12.form-group
+        label(for="descripcion") Descripcion:
+        textarea#descripcion.form-control(rows=3 type="text", name="descripcion", placeholder="Descripcion de factura")

@@ -2,6 +2,7 @@ extends common/layout
 
 block headerScripts
     link(rel='stylesheet', href='/css/resourcesPage.css')
+    link(rel="stylesheet", href="/plugins/css/bootstrap-datepicker.min.css")
 
 block content
     ul.nav.nav-tabs
@@ -93,13 +94,13 @@ block content
 
                 h2.text-center Lista de polizas
                 div.row
-                    div.col-md-offset-1.col-md-10
+                    div.col-md-12
                         ul.nav.nav-pills.nav-justified
                             li.active #[a(data-toggle="pill", href="#activePolizas") Polizas activas]
                             li #[a(data-toggle="pill", href="#inactivePolizas") Todas las polizas]
                     div.tab-content
                         div#activePolizas.tab-pane.fade.in.active
-                            div.col-md-offset-1.col-md-10.col-xs-12
+                            div.col-md-12.col-xs-12
                                 table.table.table-bordered
                                     thead
                                         tr.vertical-aligned-trow
@@ -146,7 +147,7 @@ block content
                                     //- */
                         //- List all the polizas that have already expired and are no longer active
                         div#inactivePolizas.tab-pane.fade
-                            div.col-md-offset-1.col-md-10.col-xs-12
+                            div.col-md-12.col-xs-12
                                 table.table.table-bordered
                                     thead
                                         tr.vertical-aligned-trow

@@ -1,0 +1,49 @@
+extends common/layout
+
+block headerScripts
+    link(rel="stylesheet", href="/plugins/css/select2.min.css")
+    link(rel="stylesheet", href="/plugins/css/select2-bootstrap.min.css")
+    link(rel="stylesheet", href="/plugins/css/bootstrap-datepicker.min.css")
+
+block content
+    div.jumbotron
+        h2 Registro de facturas
+        div.container
+            //- Show message alert, if there's any in Flash-connect
+            if message && message.length > 0
+                include common/alertMessages
+
+            form#polizaForm(action="/facturas/add", method="post")
+                div.row
+                    div.col-md-offset-1.col-md-10
+                        include forms/facturasForm
+                //- Submit button
+                div.form-group.row.text-center
+                            button.btn.btn-primary(type="submit") Agregar factura
+        
+        //- Listado de facturas
+        h2 Facturas capturadas 
+        table.table.table-bordered
+            thead
+                th ID Factura
+                th Empresa
+                th Emisor
+                th Costo
+                th Descripcion
+                th Pagado
+                th Usuario que capturo
+                th Usuario que capturo
+                th Fecha de factura
+                th Fecha de captura
+            tbody
+
+
+block additionalScripts
+    script(src="/js/datePickerFormat.js")
+    script(src="/js/selectInitialization.js")
+    //- For datepicker with bootstrap
+    script(src="/plugins/js/moment-with-locales.min.js")
+    script(src="/plugins/js/bootstrap-datepicker.min.js")
+    script(src="/plugins/js/bootstrap-datepicker.es.min.js")
+    //- For select2 boxes
+    script(src="/plugins/js/select2.min.js")

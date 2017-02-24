@@ -2,7 +2,6 @@ body {
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
     /*color: rgb(255, 255, 255);
     background-color: rgb(50, 50, 50) !important;*/
-    word-wrap: break-word;
     padding-top: 65px;
 }
 
@@ -23,8 +22,9 @@ a {
     word-wrap: break-word;
 }
 
-select:invalid {
-    color: rgb(153, 153, 153);
+.select2 {
+    width: 100% !important;
+    color: #000 !important;
 }
 
 valid {
@@ -64,10 +64,6 @@ valid {
     /*background-color: rgb(20, 20, 20);
     color: #fff;*/
     border-radius: 0px !important;
-}
-
-.placeholder-select {
-    color: rgb(153, 153, 153);
 }
 
 .closeAlert {

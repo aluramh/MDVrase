@@ -24,4 +24,5 @@ else if (/vehicles/.test(pathname)) {
         d = document.getElementById("vehiculosTab");
     }
 }
+
 d.className += " active";
