@@ -7,8 +7,8 @@ div.row
                 option.valid(value=empresa.id_empresa) #{empresa.nombre_empresa}
 
     div.col-md-6.col-sm-6.col-xs-12.form-group
-        label(for="aseguradora") Emisor:
-        input#Emisor.form-control(type="text", name="Emisor", placeholder="Emisor de factura", required)
+        label(for="emisor") Emisor:
+        input#emisor.form-control(type="text", name="emisor", placeholder="Emisor de factura", required)
 
 div.row
     div.col-md-6.col-sm-6.col-xs-12.form-group
@@ -31,6 +31,11 @@ div.row
                 each carro in carros
                     option(value=carro.id_carro) #{carro.modelo} #{carro.color} #{carro.year} (#{carro.num_placa})
 
+    div.col-md-6.col-sm-6.col-xs-12.form-group
+        label(for="id_factura") ID de factura:
+        input#id_factura.form-control(type="text", name="id_factura", placeholder="ID de factura", required)
+
+div.row
     div.col-md-6.col-sm-6.col-xs-12.form-group
         label(for="descripcion") Descripcion:
         textarea#descripcion.form-control(rows=3 type="text", name="descripcion", placeholder="Descripcion de factura")
