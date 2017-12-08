@@ -1,6 +1,7 @@
 extends common/layout
 
 block headerScripts
+    link(rel="stylesheet", href="/plugins/css/jquery-ui.css")
     link(rel="stylesheet", href="/plugins/css/select2.min.css")
     link(rel="stylesheet", href="/plugins/css/select2-bootstrap.min.css")
     link(rel="stylesheet", href="/plugins/css/bootstrap-datepicker.min.css")
@@ -32,10 +33,20 @@ block content
                 th Descripcion
                 th Pagado
                 th Usuario que capturo
-                th Usuario que capturo
                 th Fecha de factura
                 th Fecha de captura
             tbody
+                each factura in facturas
+                    tr
+                        td #{factura.id_factura}
+                        td #{factura.empresa}
+                        td #{factura.emisor}
+                        td #{factura.costo}
+                        td #{factura.descripcion}
+                        td #{factura.pagado}
+                        td id Usuario
+                        td #{factura.fecha_factura}
+                        td #{factura.fecha_capturado}
 
 
 block additionalScripts
@@ -47,3 +58,35 @@ block additionalScripts
     script(src="/plugins/js/bootstrap-datepicker.es.min.js")
     //- For select2 boxes
     script(src="/plugins/js/select2.min.js")
+    //- For autocompleting the inputs
+    script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js")
+    script.
+        $( function() {
+            var availableTags = [
+                "ActionScript",
+                "AppleScript",
+                "Asp",
+                "BASIC",
+                "C",
+                "C++",
+                "Clojure",
+                "COBOL",
+                "ColdFusion",
+                "Erlang",
+                "Fortran",
+                "Groovy",
+                "Haskell",
+                "Java",
+                "JavaScript",
+                "Lisp",
+                "Perl",
+                "PHP",
+                "Python",
+                "Ruby",
+                "Scala",
+                "Scheme"
+            ];
+            $( "#emisor" ).autocomplete({
+                source: availableTags
+            });
+        } );

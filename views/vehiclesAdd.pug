@@ -9,6 +9,8 @@ block content
         if message.length > 0
             include common/alertMessages
 
+        h1.text-center Agregar vehiculo
+
         form#carForm(action="/vehicles/add", method="post")
             h3.text-center Informacion del vehiculo
             div.vehicleInformationContainer

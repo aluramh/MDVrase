@@ -1,8 +1,9 @@
 extends common/layout
 
 block headerScripts
-    link(rel='stylesheet', href='/css/resourcesPage.css')
-    link(rel="stylesheet", href="/plugins/css/bootstrap-datepicker.min.css")
+    link(href='/css/resourcesPage.css', rel='stylesheet')
+    link(href="/plugins/css/bootstrap-datepicker.min.css", rel="stylesheet")
+    //- link(href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/2.11.0/tabulator.min.css" rel="stylesheet")
 
 block content
     ul.nav.nav-tabs
@@ -20,11 +21,11 @@ block content
                 h2.text-center Agregar marca de vehiculos
                 form#marcaForm(action="/resources/add", method="post")
                     div.row
-                        textarea(name="formType", style="display:none;" required, readonly="readonly") addMarca
+                        textarea(name="formType", style="display:none;", required, readonly="readonly") addMarca
                         div.col-md-offset-2.col-xs-12.col-md-8.extra-padding
                             label(for="marca") Marca de vehiculo:
                             div.input-group
-                                input#marca.form-control(type="text", name="marca", placeholder="Ingresar una marca de vehiculos", required)
+                                input#marca.form-control(name="marca", type="text", placeholder="Ingresar una marca de vehiculos", required)
                                 span.input-group-btn
                                     button.btn.btn-primary(type="submit") Agregar
 
@@ -47,7 +48,7 @@ block content
                 h2.text-center Agregar empresas
                 form#empresaForm(action="/resources/add", method="post")
                     div.row
-                        textarea(name="formType", style="display:none;" required, readonly="readonly") addEmpresa
+                        textarea(name="formType", style="display:none;", required, readonly="readonly") addEmpresa
                         //- Offset column by 2 and make 8col in width
                         div.col-md-offset-2.col-md-8 
                             //- Inside this 8c element we have 12 available cols.
@@ -55,12 +56,12 @@ block content
                             div.col-md-5.no-right-padding
                                 label(for="empresa") Nombre de empresa:
                                 div.form-group
-                                    input#empresa.form-control(type="text", name="empresa", placeholder="Ingresa el nombre de la empresa", required)
+                                    input#empresa.form-control(name="empresa", type="text", placeholder="Ingresa el nombre de la empresa", required)
                             //- Second input 
                             div.col-md-5.no-right-padding
                                 label(for="rfc") RFC de empresa:
                                 div.form-group
-                                    input#rfc.form-control(type="text", name="rfc", placeholder="Ingresa el RFC de la empresa", required)
+                                    input#rfc.form-control(name="rfc", type="text", placeholder="Ingresa el RFC de la empresa", required)
 
                             //- Submit button
                             div.col-md-2
@@ -86,7 +87,7 @@ block content
             div#polizasResources.tab-pane.fade.in.active
                 h2.text-center Agregar polizas
                 form#polizaForm(action="/resources/add", method="post")
-                    textarea(name="formType", style="display:none;" required, readonly="readonly") addPoliza
+                    textarea(name="formType", style="display:none;", required, readonly="readonly") addPoliza
                     include forms/polizaForm
                                     
                     div.form-group.row.text-center
@@ -101,7 +102,7 @@ block content
                     div.tab-content
                         div#activePolizas.tab-pane.fade.in.active
                             div.col-md-12.col-xs-12
-                                table.table.table-bordered
+                                table#polizasTable.table.table-bordered
                                     thead
                                         tr.vertical-aligned-trow
                                             th No. de poliza
@@ -109,7 +110,7 @@ block content
                                             th Fecha de vencimiento
                                             th Aseguradora
                                             th Vehiculo
-                                            th.actions-container
+                                            th.actions-container Acciones
                                     tbody
                                         each poliza in polizas
                                             tr.custom-trow.vertical-aligned-trow
@@ -123,28 +124,6 @@ block content
                                                         button.btn.btn-warning #[span.glyphicon.glyphicon-edit]
                                                         button.btn.btn-danger #[span.glyphicon.glyphicon-remove-sign]  
 
-                                    //- /*
-                                    //- num_poliza
-                                    //- id_carro
-                                    //- poliza_actual
-                                    //- id_carro
-                                    //- empresa
-                                    //- num_placa
-                                    //- foto_vehiculo
-                                    //- color
-                                    //- modelo
-                                    //- marca
-                                    //- year
-                                    //- num_serie
-                                    //- fecha_obtenido
-                                    //- equipo_extra
-                                    //- descripcion
-                                    //- conductor
-                                    //- num_poliza
-                                    //- fecha_vencimiento
-                                    //- fecha_expedicion
-                                    //- aseguradora
-                                    //- */
                         //- List all the polizas that have already expired and are no longer active
                         div#inactivePolizas.tab-pane.fade
                             div.col-md-12.col-xs-12
@@ -174,3 +153,17 @@ block additionalScripts
     script(src="/plugins/js/moment-with-locales.min.js")
     script(src="/plugins/js/bootstrap-datepicker.min.js")
     script(src="/plugins/js/bootstrap-datepicker.es.min.js")
+    //- script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js")
+    //- script(src="https://cdnjs.cloudflare.com/ajax/libs/tabulator/2.11.0/tabulator.min.js" type="text/javascript")
+    //- script.
+    //-     $('#polizasTable').tabulator({
+    //-         fitColumns: true,
+    //-             columns:[
+    //-                 {title:"No. de poliza", sorter:"string", sortable:true},
+    //-                 {title:"Fecha de expedicion", width:150, sortable: true},
+    //-                 {title:"Fecha de vencimiento", width:150, sortable:true},
+    //-                 {title:"Aseguradora", sorter:"string", sortable: true},
+    //-                 {title:"Vehiculo", sorter:"string", sortable:true},
+    //-                 {title:"Acciones", width:100, align: 'center'},
+    //-             ],
+    //-     })
