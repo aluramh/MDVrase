@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const companies = require('./../models/companies');
+const roles = require('./../models/roles');
 
 router.get('/', async (req, res, next) => {
   try {
-    const companies = await companies.getCompanies();
-    res.send(companies);
+    res.send((await roles.getRoles()));
   } catch (e) {
     next(e);
   }

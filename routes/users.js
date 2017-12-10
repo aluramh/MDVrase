@@ -1,28 +1,19 @@
 var express = require('express');
-var router = express.Router();
-
 var auth = require('./authenticate');
-var resourcesController = require('./../controllers/resourcesController');
-var profileController = require('./../controllers/profileController');
+var users = require('./../models/users');
+
+var router = express.Router();
 
 //Require authentication for each route
 router.use(auth.isLoggedIn);
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    var templateData = {
-        title: 'Usuarios',
-        loggedIn: req.isAuthenticated(),
-        message: req.flash('message'),
-        success: req.flash('success')
-    };
-    resourcesController.getEmpresas(req, res, templateData, function getUsersList(req, res, templateData, rows) {
-        templateData.companies = rows;
-        profileController.getAllUsersInfo(req, res, templateData, function renderUsersPage(req, res, templateData, rows) {
-            templateData.usuarios = rows;
-            res.render('users.pug', templateData);
-        });
-    });
+  try {
+    res.send((await users.getUsers()))
+  } catch (e) {
+      next(e);
+  }
 });
 
 module.exports = router;

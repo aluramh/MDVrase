@@ -2,9 +2,7 @@ var express = require('express');
 var moment = require('moment')
 var router = express.Router();
 
-var resourcesController = require('./../controllers/resourcesController');
-var vehiclesController = require('./../controllers/vehiclesController');
-var facturasController = require('./../controllers/facturasController');
+var facturasController = require('./../models/facturasController');
 
 router.get('/', async (req, res, next) => {
   try {
