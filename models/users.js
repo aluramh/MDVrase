@@ -1,17 +1,17 @@
 const db = require('./../config/db.helper');
 
 module.exports = {
-  getUsers: (userObject) => {
-    return new Promise((reject, resolve) => {
+  getUsers: () => {
+    return new Promise((resolve, reject) => {
       let query = `
         SELECT * FROM usuarios WHERE 1
       `;
       let whereStatements = '';
 
-      // Search by username
-      if (userObject.username != null) {
-        whereStatements += `AND username = ${db.esc} `
-      }
+      // // Search by username
+      // if (userObject.username) {
+      //   whereStatements += `AND username = ${db.esc} `
+      // }
 
       db.query(query + whereStatements, null, (err, rows) => {
         if (err) return reject(err);

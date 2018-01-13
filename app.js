@@ -11,16 +11,6 @@ var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var login = require('./routes/login');
-var signup = require('./routes/signup');
-var profile = require('./routes/profile');
-var logout = require('./routes/logout');
-var vehicles = require('./routes/vehicles');
-var resources = require('./routes/resources');
-var facturas = require('./routes/facturas');
-
 var app = express();
 
 // configuration ===============================================================
@@ -50,21 +40,18 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
 //Initialize public folder access for assets
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
-app.use('/login', login);
-app.use('/signup', signup);
-app.use('/profile', profile);
-app.use('/logout', logout);
-app.use('/vehicles', vehicles);
-app.use('/resources', resources);
-app.use('/facturas', facturas);
+app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
+app.use('/login', require('./routes/login'));
+app.use('/signup', require('./routes/signup'));
+// app.use('/profile', require('./routes/profile'));
+// app.use('/logout', require('./routes/logout'));
+// app.use('/vehicles', require('./routes/vehicles'));
+// app.use('/resources', require('./routes/resources'));
+// app.use('/facturas', require('./routes/facturas'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
