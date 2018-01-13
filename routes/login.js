@@ -10,28 +10,23 @@ var router = express.Router();
 router.get('/', function (req, res) {
     if (req.isAuthenticated() === true) {
         // If the user is already logged in, redirect him to profile.
-        res.redirect({status: 301, message: 'Redirect to profile'});
+        res.redirect('You are logged in.');
     } else {
-        res.send({message: 'Already logged in.'});
+        res.render('login.pug')
     }
 });
 
-router.post('/', function (req, res, next) {
-    passport.authenticate('local-login', function (err, user, info) {
-        if (err) {
-            return res.status(500).send(err);
-        }
+router.post('/', (req, res, next) => {
+    passport.authenticate('local-login', (err, user, info) => {
+        if (err) return res.status(500).send(err);
+
         if (!user) {
             res.redirect({status: 301, message: 'Redirect to Login page'});
         }
-        req.logIn(user, function (err) {
-            if (err) {
-                return res.status(500).send(err);
-            }
-            //Check if remember me was activated in previous Login step
-            if (req.body.remember == 1) {
-                res.cookie('usernameCookie', req.body.username);
-            }
+
+        req.logIn(user, (err) => {
+            if (err) return res.status(500).send(err);
+
             return res.send({
                 status: 200,
                 message: 'Successful login',
