@@ -20,9 +20,13 @@ router.post('/', (req, res, next) => {
     passport.authenticate('local-login', (err, user, info) => {
         if (err) return res.status(500).send(err);
 
-        if (!user) {
-            res.redirect({status: 301, message: 'Redirect to Login page'});
-        }
+        if (!user) return res.status(401).send(
+            {
+                ...user, 
+                errorMessage: info,
+                message: 'Redirect to Login page'
+            }
+        );
 
         req.logIn(user, (err) => {
             if (err) return res.status(500).send(err);

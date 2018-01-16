@@ -4,22 +4,23 @@ const users = require('./../models/users');
 
 const router = express.Router();
 
-//Require authentication for each route
-router.use(auth.isLoggedIn);
-
-/* GET users listing. */
-router.get('/', async (req, res, next) => {
+router.get('/session', async (req, res, next) => {
   try {
-    const usersResponse = await users.getUsers() 
-    res.send(usersResponse)
+    let userSession = req.user ? req.user : {}
+    res.send(userSession)
   } catch (e) {
     next(e);
   }
 });
 
-router.get('/self', async (req, res, next) => {
+//Require authentication for each route
+// router.use(auth.isLoggedIn);
+
+/* GET users listing. */
+router.get('/', auth.isLoggedIn, async (req, res, next) => {
   try {
-    res.send(req.user)
+    const usersResponse = await users.getUsers() 
+    res.send(usersResponse)
   } catch (e) {
     next(e);
   }
