@@ -71,9 +71,10 @@ app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 app.use('/login', require('./routes/login'));
 app.use('/signup', require('./routes/signup'));
+app.use('/vehicles', require('./routes/vehicles'));
+
 // app.use('/profile', require('./routes/profile'));
 // app.use('/logout', require('./routes/logout'));
-// app.use('/vehicles', require('./routes/vehicles'));
 // app.use('/resources', require('./routes/resources'));
 // app.use('/facturas', require('./routes/facturas'));
 

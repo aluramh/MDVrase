@@ -3,22 +3,19 @@ var passport = require('passport');
 
 var router = express.Router();
 var auth = require('./authenticate');
-var vehiclesController = require('./../controllers/vehiclesController');
-var hf = require('./../helpers/helperFunctions');
+const vehicles = require('./../models/vehicles');
 
 //Require authentication for each route
-router.use(auth.isLoggedIn);
+// router.use(auth.isLoggedIn);
 
-router.get('/', function (req, res) {
+router.get('/', async (req, res, next) => {
+  try {
     //Get list of all available cars
-    vehiclesController.getCars(req, res, null, function renderVehiclesPage(req, res, empty, vehiclesData) {
-        // render the page and pass in any flash data if it exists
-        res.render('vehicles.pug', {
-            title: 'Vehiculos',
-            vehicles: vehiclesData,
-            loggedIn: req.isAuthenticated()
-        });
-    });
+    const vehiclesRows = await vehicles.getCars(req.query);
+    res.send(vehiclesRows)
+  } catch(e) {
+    next(e)
+  }
 });
 
 router.get('/add', function (req, res) {
