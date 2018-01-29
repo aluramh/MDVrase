@@ -48,7 +48,7 @@ const db = require('./../config/db.helper');
 // };
 
 module.exports = {
-  getMarcas: () => {
+  getMarcas: (keyword) => {
     return new Promise((reject, resolve) => {
       db.query('SELECT * FROM marcas WHERE 1', null, (err, rows) => {
         if (err) return reject(err);
@@ -57,16 +57,7 @@ module.exports = {
     })
   },
 
-  getEmpresas: () => {
-    return new Promise((reject, resolve) => {
-      db.query('SELECT * FROM empresas WHERE 1', null, (err, rows) => {
-        if (err) return reject(err);
-        resolve(rows);
-      })
-    })
-  },
-
-  getPolizas: () => {
+  getPolizas: (keyword) => {
     return new Promise((reject, resolve) => {
         const query = `
           SELECT 

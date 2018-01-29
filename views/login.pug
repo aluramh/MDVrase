@@ -5,9 +5,6 @@ block content
         div.col-sm-6.col-sm-offset-3
             h1.
                 <span class="fa fa-sign-in"></span> Login</h1>
-            //- Show message alert, if there's any in Flash-connect
-            if message.length > 0
-                include common/alertMessages
 
             //- Login form
             form#loginForm(action="/login", method="post")

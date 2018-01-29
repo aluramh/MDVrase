@@ -10,16 +10,7 @@ var session = require('express-session');
 // get all the tools we need for Passport
 var passport = require('passport');
 var flash = require('connect-flash');
-
-var index = require('./routes/index');
-var users = require('./routes/users');
-var login = require('./routes/login');
-var signup = require('./routes/signup');
-var profile = require('./routes/profile');
-var logout = require('./routes/logout');
-var vehicles = require('./routes/vehicles');
-var resources = require('./routes/resources');
-var facturas = require('./routes/facturas');
+require('dotenv').config()
 
 var app = express();
 
@@ -44,27 +35,48 @@ app.set('view engine', 'pug'); //Set up pug for templating
 app.use(session({
     secret: 'farmaceutica_rase123',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { 
+        path: '/', 
+        domain: 'localhost',
+        secure: false, 
+        maxAge: null 
+    }
 })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
 //Initialize public folder access for assets
 app.use(express.static(path.join(__dirname, 'public')));
+// For the React Front-end
+app.use('/static', express.static(`${process.env.BUILD_DIR}/static`));
 
-app.use('/', index);
-app.use('/users', users);
-app.use('/login', login);
-app.use('/signup', signup);
-app.use('/profile', profile);
-app.use('/logout', logout);
-app.use('/vehicles', vehicles);
-app.use('/resources', resources);
-app.use('/facturas', facturas);
+// Set CORS of allowed addresses
+app.use((req, res, next) => {
+    const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'http://localhost'];
+    const origin = req.headers.origin;
+
+	if (allowedOrigins.includes(origin)) {
+		res.setHeader('Access-Control-Allow-Origin', origin);
+    }
+
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,OPTIONS,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+    next();
+});
+
+app.use('/', require('./routes/index'));
+app.use('/users', require('./routes/users'));
+app.use('/login', require('./routes/login'));
+app.use('/signup', require('./routes/signup'));
+app.use('/vehicles', require('./routes/vehicles'));
+
+// app.use('/profile', require('./routes/profile'));
+// app.use('/logout', require('./routes/logout'));
+// app.use('/resources', require('./routes/resources'));
+// app.use('/facturas', require('./routes/facturas'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

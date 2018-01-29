@@ -9,34 +9,33 @@ var router = express.Router();
 // show the login form
 router.get('/', function (req, res) {
     if (req.isAuthenticated() === true) {
-        res.redirect('/profile');
+        // If the user is already logged in, redirect him to profile.
+        res.redirect('You are logged in.');
     } else {
-        // render the page and pass in any flash data if it exists
-        res.render('login.pug', {
-            title: 'Ingresar a la pagina',
-            message: req.flash('loginMessage'),
-            loggedIn: req.isAuthenticated()
-        });
+        res.render('login.pug')
     }
 });
 
-router.post('/', function (req, res, next) {
-    passport.authenticate('local-login', function (err, user, info) {
-        if (err) {
-            return next(err);
-        }
-        if (!user) {
-            return res.redirect('/login');
-        }
-        req.logIn(user, function (err) {
-            if (err) {
-                return next(err);
+router.post('/', (req, res, next) => {
+    passport.authenticate('local-login', (err, user, info) => {
+        if (err) return res.status(500).send(err);
+
+        if (!user) return res.status(401).send(
+            {
+                ...user, 
+                errorMessage: info,
+                message: 'Redirect to Login page'
             }
-            //Check if remember me was activated in previous Login step
-            if (req.body.remember == 1) {
-                res.cookie('usernameCookie', req.body.username);
-            }
-            return res.redirect('/profile');
+        );
+
+        req.logIn(user, (err) => {
+            if (err) return res.status(500).send(err);
+
+            return res.send({
+                status: 200,
+                message: 'Successful login',
+                data: user
+            });
         });
     })(req, res, next);
 });

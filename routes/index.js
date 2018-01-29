@@ -4,11 +4,8 @@ var router = express.Router();
 // =====================================
 // HOME PAGE (with login links) ========
 // =====================================
-router.get('/', function (req, res) {
-    res.render('index.pug', {
-        title: 'Manejo de vehiculos RASE',
-        loggedIn: req.isAuthenticated()
-    }); // load the index.ejs file
+router.get('/', (req, res, next) => {
+    res.sendFile(`${process.env.BUILD_DIR}/index.html`)
 });
 
 module.exports = router;
