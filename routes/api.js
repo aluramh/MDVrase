@@ -1,26 +1,28 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var resourcesController = require('./../controllers/resourcesController');
-var vehiclesController = require('./../controllers/vehiclesController');
-var facturasController = require('./../controllers/facturasController');
+router.use('/users', require('./users'));
+router.use('/login', require('./login'));
+router.use('/signup', require('./signup'));
+router.use('/vehicles', require('./vehicles'));
+router.use('/polizas', require('./polizas'));
 
-router.post('/getmarcas', function (req, res) {
-    facturasController.addFactura(req, res, (req, res) => {
-        res.redirect('/facturas');
-    });
-});
+// router.post('/getmarcas', function (req, res) {
+//     facturasController.addFactura(req, res, (req, res) => {
+//         res.redirect('/facturas');
+//     });
+// });
 
-router.post('/getmodelos', function (req, res) {
-    facturasController.addFactura(req, res, (req, res) => {
-        res.redirect('/facturas');
-    });
-});
+// router.post('/getmodelos', function (req, res) {
+//     facturasController.addFactura(req, res, (req, res) => {
+//         res.redirect('/facturas');
+//     });
+// });
 
-router.post('/getemisores', function (req, res) {
-    facturasController.getEmisores((rows) => {
-        res.send(rows);
-    });
-});
+// router.post('/getemisores', function (req, res) {
+//     facturasController.getEmisores((rows) => {
+//         res.send(rows);
+//     });
+// });
 
 module.exports = router;

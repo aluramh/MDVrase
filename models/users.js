@@ -21,7 +21,7 @@ module.exports = {
   },
 
   addUser: (newUser) => {
-    return new Promise((reject, resolve) => {
+    return new Promise((resolve, reject) => {
       const sql = `
         INSERT INTO usuarios (
           username, rol, empresa, nombre, password, activo
